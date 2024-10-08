@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MainWeatherCard from "./MainWeatherCard";
-// import PropTypes from "prop-types";
+import { useCoordinates } from "../../contexts/CoordinatesContext";
+
+
 
 
 export default function MainWeatherContainer() {
 
   const [search, setSearch] = useState("");
-  const [city, setCity] = useState("barranquilla");
+  const { setCity } = useCoordinates();
 
 
   function onSubmit(e){
@@ -17,11 +19,6 @@ export default function MainWeatherContainer() {
 
     setSearch("");
   }
-
-
-  useEffect(() => {
-    console.log(city);
-  }, [city])
 
   return (
     <div className={`flex flex-col gap-4 px-6 w-6/12 h-full`} >
@@ -39,16 +36,8 @@ export default function MainWeatherContainer() {
         />
       </form>
       
-      <MainWeatherCard city={city} />
+      <MainWeatherCard />
 
     </div>
   )
 }
-
-
-// MainWeatherContainer.propTypes = {
-//   data: PropTypes.object,
-//   isPending: PropTypes.bool,
-//   onChangeCity: PropTypes.func,
-//   error: PropTypes.string,
-// }

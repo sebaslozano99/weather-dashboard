@@ -1,15 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
+import { useCoordinates } from "../../contexts/CoordinatesContext";
 import getLatAndLng from "../../services/openWeather";
-import PropTypes from "prop-types";
 
-export default function MainWeatherCard({city}) {
+export default function MainWeatherCard() {
 
-    
+    const { city } = useCoordinates();
+
 
     const { data, isPending, error, isError } = useQuery({
         queryKey: ["mainWeather", city],
         queryFn: () => getLatAndLng(city),
     });
+
+    console.log(data);
 
     const { name, sys, main } = data ?? {};
 
@@ -19,6 +22,7 @@ export default function MainWeatherCard({city}) {
             Loading...
         </div>
     )
+
 
     if(isError) return <div>{error.message}</div>
 
@@ -41,8 +45,3 @@ export default function MainWeatherCard({city}) {
     </div>
   )
 }
-
-
-MainWeatherCard.propTypes = {
-    city: PropTypes.string,
-  }
