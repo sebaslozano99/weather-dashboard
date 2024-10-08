@@ -1,8 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
+import getLatAndLng from "../../services/openWeather";
 import PropTypes from "prop-types";
 
+export default function MainWeatherCard({city}) {
 
+    
 
-export default function MainWeatherCard({data, isPending, error}) {
+    const { data, isPending, error, isError } = useQuery({
+        queryKey: ["mainWeather", city],
+        queryFn: () => getLatAndLng(city),
+    });
 
     const { name, sys, main } = data ?? {};
 
@@ -13,27 +20,29 @@ export default function MainWeatherCard({data, isPending, error}) {
         </div>
     )
 
-    // if()
+    if(isError) return <div>{error.message}</div>
 
   return (
-    <div className="p-4 w-full h-full shadow-xl bg-white/20 rounded-2xl" >
+    <div className="py-20 px-4 w-full h-full shadow-xl bg-white/20 rounded-2xl" >
 
-        <h2 className="font-bold text-3xl" >{name}-{sys.country}</h2>
+        <div className="flex flex-col items-center gap-4 border-2 border-red-500" >
 
-        <div>
+            <h2 className="font-thin text-4xl text-center tracking-wider" >{name}-{sys.country}</h2> 
+
             <img 
                 src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt={data.weather[0].description} 
-                className="w-32"
+                className="border-2 border-purple-800"
             />
-            <p className="font-semibold text-xl" >{main.temp}°C</p>
+
+            <p className="font-bold text-center text-5xl" >{main.temp}°C</p>
+
         </div>
+
     </div>
   )
 }
 
 
 MainWeatherCard.propTypes = {
-    data: PropTypes.object,
-    isPending: PropTypes.bool,
-    error: PropTypes.string,
+    city: PropTypes.string,
   }

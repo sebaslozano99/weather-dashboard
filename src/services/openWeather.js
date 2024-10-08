@@ -8,7 +8,7 @@ async function getLatAndLng(cityName){
         //get lat and lng from cityName
         const firstResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`);
 
-        if(firstResponse.statusText === "Not Found") throw new Error("City was not found!");
+        if(firstResponse.statusText === "Not Found") throw new Error(`The city ${cityName.toUpperCase()} could not found!`);
 
         const firstData = await firstResponse.json();
 
