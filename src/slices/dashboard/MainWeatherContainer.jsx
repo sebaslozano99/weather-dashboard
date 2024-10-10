@@ -1,7 +1,5 @@
 import MainWeatherCard from "./MainWeatherCard";
-import SearchBar from "./SearchBar";
-
-
+import SearchBar from "./search/SearchBar";
 
 
 

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { convertTextToPosition } from "../../services/openWeather";
-import { useSearch } from "../../contexts/SearchContext";
+import { cityNameToPosition } from "../../../services/openWeather";
+import { useSearch } from "../../../contexts/SearchContext";
 import SuggestionsContainer from "./SuggestionsContainer";
 
 
@@ -12,7 +12,7 @@ export default function SearchBar() {
 
   const { data, isPending } = useQuery({
     queryKey: [search],
-    queryFn: async ({signal}) => convertTextToPosition(search, signal)
+    queryFn: async ({signal}) => cityNameToPosition(search, signal)
 
   });
 

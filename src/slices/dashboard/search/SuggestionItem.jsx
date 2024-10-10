@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { useCoordinates } from "../../contexts/CoordinatesContext";
-import { useSearch } from "../../contexts/SearchContext";
+import { useCoordinates } from "../../../contexts/CoordinatesContext";
+import { useSearch } from "../../../contexts/SearchContext";
 
 
 export default function SuggestionItem({location}) {
@@ -8,14 +8,16 @@ export default function SuggestionItem({location}) {
   const { setCity } = useCoordinates();
   const { setSearch } = useSearch();
 
-
+  
   function setNewPosition(newPosition){
+    
+
     setCity({
         lat: newPosition?.lat,
         lon: newPosition?.lon,
     });
 
-    
+
     setSearch("");
   }
 

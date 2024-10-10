@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCoordinates } from "../../contexts/CoordinatesContext";
-import { getLatAndLng } from "../../services/openWeather";
+import { getWeatherData } from "../../services/openWeather";
 
 export default function MainWeatherCard() {
 
@@ -9,7 +9,7 @@ export default function MainWeatherCard() {
 
     const { data, isPending, error, isError } = useQuery({
         queryKey: ["mainWeather", city],
-        queryFn: () => getLatAndLng(city),
+        queryFn: () => getWeatherData(city),
     });
 
     const { name, sys, main } = data ?? {};
@@ -19,7 +19,6 @@ export default function MainWeatherCard() {
             Loading...
         </div>
     )
-
 
     if(isError) return <div>{error.message}</div>
 

@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
-import { useCoordinates } from "../../contexts/CoordinatesContext";
+import { useCoordinates } from "../../../contexts/CoordinatesContext";
 import PropTypes from "prop-types";
 
 
@@ -42,7 +42,7 @@ function DetectClick(){
 
   useMapEvents({
     click: (e) => {
-      console.log(e);
+      // console.log(e);
       setCity({lat: e.latlng.lat, lon: e.latlng.lng})
     },
   })

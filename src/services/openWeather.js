@@ -3,18 +3,14 @@
 const API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
 
-async function getLatAndLng(city){
+async function getWeatherData(city){
     try {
-        //get lat and lng from cityName
-        // const firstResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`);
 
-        const firstResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${API_KEY}&units=metric`);
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${API_KEY}&units=metric`);
 
-        // if(firstResponse.statusText === "Not Found") throw new Error(`The city ${cityName.toUpperCase()} could not found!`);
+        const data = await res.json();
 
-        const firstData = await firstResponse.json();
-
-        return firstData;
+        return data;
     }
     catch(err){
         throw new Error(err);
@@ -24,7 +20,7 @@ async function getLatAndLng(city){
 
 
 
-async function convertTextToPosition(cityName, signal){
+async function cityNameToPosition(cityName, signal){
 
     if(cityName.length < 3) return [];
 
@@ -36,7 +32,6 @@ async function convertTextToPosition(cityName, signal){
         return data;
     }
     catch(err){
-        // Handle specific fetch error or abort error
         if (err.name === 'AbortError') {
             console.log('Fetch aborted');
         } else {
@@ -49,4 +44,4 @@ async function convertTextToPosition(cityName, signal){
 
 
 
-export { getLatAndLng, convertTextToPosition };
+export { getWeatherData, cityNameToPosition };

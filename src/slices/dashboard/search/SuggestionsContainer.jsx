@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import SuggestionItem from "./SuggestionItem";
-import Spinner from "../../ui/Spinner";
+import Spinner from "../../../ui/Spinner";
 
 
 

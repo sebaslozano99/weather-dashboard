@@ -1,5 +1,5 @@
 import MainWeatherContainer from "../slices/dashboard/MainWeatherContainer";
-import Map from "../slices/dashboard/Map";
+import Map from "../slices/dashboard/map/Map";
 
 
 
