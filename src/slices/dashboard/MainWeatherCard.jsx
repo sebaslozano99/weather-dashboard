@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCoordinates } from "../../contexts/CoordinatesContext";
-import getLatAndLng from "../../services/openWeather";
+import { getLatAndLng } from "../../services/openWeather";
 
 export default function MainWeatherCard() {
 
@@ -12,8 +12,8 @@ export default function MainWeatherCard() {
         queryFn: () => getLatAndLng(city),
     });
 
-    console.log(data);
 
+    
     const { name, sys, main } = data ?? {};
 
 

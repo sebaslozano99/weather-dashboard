@@ -1,31 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainWeatherCard from "./MainWeatherCard";
-import { useCoordinates } from "../../contexts/CoordinatesContext";
+import { convertTextToPosition } from "../../services/openWeather";
+import { useQuery } from "@tanstack/react-query";
+import SuggestionsContainer from "../../ui/SuggestionsContainer";
+
 
 
 
 
 export default function MainWeatherContainer() {
 
+  const [obtainedCities, setObtainedCities] = useState([]);
   const [search, setSearch] = useState("");
-  const { setCity } = useCoordinates();
+
+  const { data } = useQuery({
+    queryKey: [search],
+    queryFn: ({signal}) => convertTextToPosition(search, signal)
+  })
+
+
+
+
+  useEffect(() => {
+    if(!data?.length) return;
+    setObtainedCities(data);
+    console.log(obtainedCities);
+  },[data, obtainedCities])
 
 
   function onSubmit(e){
     e.preventDefault();
 
     if(!search) return;
-    setCity(search);
+    // setCity(search);
 
     setSearch("");
   }
+
 
   return (
     <div className={`flex flex-col gap-4 px-6 w-6/12 h-full`} >
 
       <form 
         onSubmit={onSubmit}
-        className="" 
+        className="relative" 
       >
         <input 
           type="text" 
@@ -34,6 +52,9 @@ export default function MainWeatherContainer() {
           value={search}
           onChange={(e) => setSearch(e.target.value)} 
         />
+
+        <SuggestionsContainer locations={obtainedCities} />
+
       </form>
       
       <MainWeatherCard />
