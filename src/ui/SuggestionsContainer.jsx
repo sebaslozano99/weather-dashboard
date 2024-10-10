@@ -3,13 +3,13 @@ import SuggestionItem from "./SuggestionItem";
 
 
 
-export default function SuggestionsContainer({locations}) {
+export default function SuggestionsContainer({locations, setObtainedCities}) {
 
 
   return (
-    <div className="absolute w-full" >  
+    <div className="absolute w-full mt-1 bg-white rounded-lg" >  
         {
-            locations.map((location) => <SuggestionItem key={`${location.lat}-${location.lon}`} location={location} />  )
+            locations?.map((location) => <SuggestionItem key={`${location.lat}-${location.lon}`} location={location} setObtainedCities={setObtainedCities} />  )
         }
     </div>
   )
@@ -17,5 +17,6 @@ export default function SuggestionsContainer({locations}) {
 
 
 SuggestionsContainer.propTypes = {
+    setObtainedCities: PropTypes.func,
     locations: PropTypes.array
 }
