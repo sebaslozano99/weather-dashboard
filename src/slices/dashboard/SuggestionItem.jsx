@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { useCoordinates } from "../contexts/CoordinatesContext";
+import { useCoordinates } from "../../contexts/CoordinatesContext";
 
 
-export default function SuggestionItem({location, setObtainedCities}) {
+export default function SuggestionItem({location, setSearch}) {
 
   const { setCity } = useCoordinates();
 
@@ -12,7 +12,7 @@ export default function SuggestionItem({location, setObtainedCities}) {
         lon: newPosition?.lon,
     });
 
-    setObtainedCities(null);
+    setSearch("");
   }
 
   return (
@@ -28,5 +28,5 @@ export default function SuggestionItem({location, setObtainedCities}) {
 
 SuggestionItem.propTypes = {
     location: PropTypes.object,
-    setObtainedCities: PropTypes.func,
+    setSearch: PropTypes.func,
 }

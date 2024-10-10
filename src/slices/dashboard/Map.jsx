@@ -12,7 +12,7 @@ export default function Map() {
   return (
     <div className="w-6/12 h-full " >
 
-      <MapContainer center={[city.lat, city.lon]} zoom={4} scrollWheelZoom={true} className="h-full" >
+      <MapContainer center={[city.lat, city.lon]} zoom={6} scrollWheelZoom={true} className="h-full" >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

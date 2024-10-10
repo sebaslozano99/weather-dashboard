@@ -10,8 +10,8 @@ const CoordinatesContext = createContext();
 function CoordinatesProvider({children}) {
 
   const [city, setCity] = useState({
-    lat: 40.7128,
-    lon: 74.0060,
+    lat: 51.50,
+    lon: 0.12,
   });
 
   return (

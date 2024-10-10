@@ -12,10 +12,7 @@ export default function MainWeatherCard() {
         queryFn: () => getLatAndLng(city),
     });
 
-
-    
     const { name, sys, main } = data ?? {};
-
 
     if(isPending) return(
         <div>
@@ -29,13 +26,13 @@ export default function MainWeatherCard() {
   return (
     <div className="py-20 px-4 w-full h-full shadow-xl bg-white/20 rounded-2xl" >
 
-        <div className="flex flex-col items-center gap-4 border-2 border-red-500" >
+        <div className="flex flex-col items-center gap-4" >
 
             <h2 className="font-thin text-4xl text-center tracking-wider" >{name}-{sys.country}</h2> 
 
             <img 
                 src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt={data.weather[0].description} 
-                className="border-2 border-purple-800"
+                className=""
             />
 
             <p className="font-bold text-center text-5xl" >{main.temp}°C</p>
