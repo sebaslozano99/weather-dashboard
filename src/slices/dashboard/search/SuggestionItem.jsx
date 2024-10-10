@@ -3,6 +3,9 @@ import { useCoordinates } from "../../../contexts/CoordinatesContext";
 import { useSearch } from "../../../contexts/SearchContext";
 
 
+
+
+
 export default function SuggestionItem({location}) {
 
   const { setCity } = useCoordinates();
@@ -10,13 +13,7 @@ export default function SuggestionItem({location}) {
 
   
   function setNewPosition(newPosition){
-    
-
-    setCity({
-        lat: newPosition?.lat,
-        lon: newPosition?.lon,
-    });
-
+    setCity({lat: newPosition?.lat, lon: newPosition?.lon});
 
     setSearch("");
   }

@@ -26,24 +26,22 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient} >
 
-      <CoordinatesProvider>
-
         <SearchProvider>
           <BrowserRouter>
-            <Routes>
-              <Route element={ <Applayout /> } >
-                <Route index element={ <Navigate replace to="homepage"  /> } />
-                <Route path="/homepage" element={ <Homepage /> }  />
-                <Route path="/users" element={ <Users /> } />
-                <Route path="/dashboard" element={ <Dashboard /> } />
-                <Route path="/myWeather" element={ <MyWeather /> } />
-                <Route path="*" element={ <NotFound /> } />
-              </Route>
-            </Routes> 
+            <CoordinatesProvider>
+              <Routes>
+                <Route element={ <Applayout /> } >
+                  <Route index element={ <Navigate replace to="homepage"  /> } />
+                  <Route path="/homepage" element={ <Homepage /> }  />
+                  <Route path="/users" element={ <Users /> } />
+                  <Route path="/dashboard" element={ <Dashboard /> } />
+                  <Route path="/myWeather" element={ <MyWeather /> } />
+                  <Route path="*" element={ <NotFound /> } />
+                </Route>
+              </Routes> 
+            </CoordinatesProvider>
           </BrowserRouter>
         </SearchProvider> 
-        
-      </CoordinatesProvider>
 
     </QueryClientProvider>
   )

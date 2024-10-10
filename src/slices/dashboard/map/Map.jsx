@@ -42,8 +42,7 @@ function DetectClick(){
 
   useMapEvents({
     click: (e) => {
-      // console.log(e);
-      setCity({lat: e.latlng.lat, lon: e.latlng.lng})
+      setCity({ lat: e.latlng.lat, lon: e.latlng.lng})
     },
   })
 }
