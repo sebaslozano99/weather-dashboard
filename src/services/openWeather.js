@@ -24,6 +24,29 @@ async function getLatAndLng(city){
 
 
 
+async function convertTextToPosition(cityName, signal){
+
+    if(cityName.length < 3) return [];
+
+    try {
+        const res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${API_KEY}`, { signal } );
+
+        const data = await res.json();
+
+        return data;
+    }
+    catch(err){
+        // Handle specific fetch error or abort error
+        if (err.name === 'AbortError') {
+            console.log('Fetch aborted');
+        } else {
+            console.error('Fetch error:', err);
+            throw new Error(err.message); // Rethrow with the original message
+        }
+    }
+}
 
 
-export default getLatAndLng;
+
+
+export { getLatAndLng, convertTextToPosition };
