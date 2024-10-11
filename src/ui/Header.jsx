@@ -5,7 +5,7 @@ import { FiMoon } from "react-icons/fi";
 
 export default function Header() {
   return (
-    <header className={`flex items-center justify-around w-full h-16 bg-[#21295C] shadow-2xl`} >
+    <header className={`flex items-center justify-around w-full h-[10vh] bg-[#21295C] shadow-2xl`} >
       <Logo />
       <NavBar />
       <button >

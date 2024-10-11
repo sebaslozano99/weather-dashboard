@@ -4,29 +4,34 @@ import PropTypes from "prop-types";
 
 
 
+
+// border-2 border-green-800
+
 export default function Map() {
 
   const { city } = useCoordinates();
 
 
   return (
-    <div className="w-6/12 h-full " >
+      <div className={`w-full md:w-6/12 h-1/2 md:h-full`} >
 
-      <MapContainer center={[city.lat, city.lon]} zoom={6} scrollWheelZoom={true} className="h-full" >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={[city.lat, city.lon]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        <MapContainer center={[city.lat, city.lon]} zoom={6} scrollWheelZoom={true} className="h-full" >
 
-        <ChangePosition position={[city.lat, city.lon]} />
-        <DetectClick />
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-      </MapContainer>
+          <Marker position={[city.lat, city.lon]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+
+          <ChangePosition position={[city.lat, city.lon]} />
+          <DetectClick />
+
+        </MapContainer>
 
     </div>
   )

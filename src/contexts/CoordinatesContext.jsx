@@ -7,6 +7,11 @@ import PropTypes from "prop-types";
 const CoordinatesContext = createContext();
 
 
+
+//I wanted to instead of useState, use useSearchParams so that the URL could be bookmarked, however, since after user changes to a different route or page that does not maintain the query parameters (i.e: moving to /Homepage without manually including the queryParameters "lat=...&lon=...") and then returning to the /Dashboard without those parameters in the URL, useSearchParams will lose access to them. I could've set default parameters but after user changes to a different page, and returns to Dashboard, it will display the default value, instead of the last user's search.
+
+
+
 function CoordinatesProvider({children}) {
 
   const [city, setCityOne] = useState(() => {

@@ -10,7 +10,7 @@ async function getWeatherData(city, signal){
 
         const data = await res.json();
 
-        if(data.name === "") throw new Error("Select a different position!");
+        if(data.name === "") throw new Error("Select a position in the land!");
 
         return data;
     }
