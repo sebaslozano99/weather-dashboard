@@ -14,7 +14,6 @@ export default function SuggestionItem({location}) {
   
   function setNewPosition(newPosition){
     setCity({lat: newPosition?.lat, lon: newPosition?.lon});
-
     setSearch("");
   }
 

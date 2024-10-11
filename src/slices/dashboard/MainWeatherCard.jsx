@@ -2,6 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useCoordinates } from "../../contexts/CoordinatesContext";
 import { getWeatherData } from "../../services/openWeather";
 import generateImageAccordingWeather from "../../helpers/imageWeather";
+import Spinner from "../../ui/Spinner";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 
 
@@ -10,21 +13,33 @@ export default function MainWeatherCard() {
 
     const { city } = useCoordinates();
 
+    const [setSearchParams] = useSearchParams();
+
     const { data, isPending, error, isError } = useQuery({
         queryKey: ["mainWeather", city],
-        queryFn: () => getWeatherData(city),
+        queryFn: ({signal}) => getWeatherData(city, signal),
+        retry: 2,
     });
     const { name, sys, main } = data ?? {};
 
 
 
+    useEffect(() => {
+        setSearchParams(city);
+    }, [city, setSearchParams])
+
+
+    
     if(isPending) return(
-        <div>
-            Loading...
+        <div className="flex justify-center items-center gap-1 w-full h-full shadow-xl bg-white/20 rounded-2xl" >
+            <Spinner size={8} />
         </div>
     )
 
-    if(isError) return <div>{error.message}</div>
+
+
+    if(isError) return <div className="flex justify-center items-center gap-1 w-full h-full shadow-xl bg-white/20 rounded-2xl" >{error.message}</div>
+
 
 
   return (

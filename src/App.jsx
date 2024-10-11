@@ -27,20 +27,21 @@ export default function App() {
     <QueryClientProvider client={queryClient} >
 
         <SearchProvider>
-          <BrowserRouter>
-            <CoordinatesProvider>
+          <CoordinatesProvider>
+            <BrowserRouter>
               <Routes>
                 <Route element={ <Applayout /> } >
                   <Route index element={ <Navigate replace to="homepage"  /> } />
                   <Route path="/homepage" element={ <Homepage /> }  />
                   <Route path="/users" element={ <Users /> } />
                   <Route path="/dashboard" element={ <Dashboard /> } />
+                  {/* <Route path="/dashboard/:moreInfo" element={ <Dashboard /> } /> */}
                   <Route path="/myWeather" element={ <MyWeather /> } />
                   <Route path="*" element={ <NotFound /> } />
                 </Route>
               </Routes> 
-            </CoordinatesProvider>
-          </BrowserRouter>
+            </BrowserRouter>
+          </CoordinatesProvider>
         </SearchProvider> 
 
     </QueryClientProvider>

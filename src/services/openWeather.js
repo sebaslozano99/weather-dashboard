@@ -3,12 +3,14 @@
 const API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
 
-async function getWeatherData(city){
+async function getWeatherData(city, signal){
     try {
 
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${API_KEY}&units=metric`);
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${API_KEY}&units=metric`, { signal } );
 
         const data = await res.json();
+
+        if(data.name === "") throw new Error("Select a different position!");
 
         return data;
     }
