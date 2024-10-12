@@ -16,25 +16,24 @@ export default function FiveDaysForecast({city}) {
   })
 
   const fiveDaysToDisplay = data?.filter((item, i) => i === 6 || i === 14 || i === 22 || i === 30 || i === 38 ? item : null);
-  console.log(fiveDaysToDisplay);
+  // console.log(fiveDaysToDisplay);
 
-  if(isPending) return <div className="flex justify-center items-center col-span-7 row-span-4 rounded-lg bg-white/20" >
+  if(isPending) return <div className="flex justify-center items-center col-span-8 row-span-4 rounded-lg bg-white/20" >
     <Spinner size={7} />
   </div>
 
   return (
-    <div className="grid grid-cols-5 col-span-7 row-span-4 gap-1 p-4 rounded-lg bg-white/20" >
+    <div className="flex md:grid md:grid-cols-5 col-span-8 row-span-4 gap-1 p-4 w-auto rounded-lg bg-white/20 overflow-auto" >
 
-        { isError && error?.error || error?.message || error?.description }
+      { isError && error?.error || error?.message || error?.description }
 
-        {
-          !isPending && !isError &&
-          fiveDaysToDisplay.map((item) => <ForecastItem key={item.dt_txt} info={item} />)
-        }
+      {
+        !isPending && !isError &&
+        fiveDaysToDisplay.map((item) => <ForecastItem key={item.dt_txt} info={item} />)
+      }
     </div>
   )
 }
-
 
 FiveDaysForecast.propTypes = {
     city: PropTypes.object,
