@@ -1,11 +1,11 @@
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link, useSearchParams } from "react-router-dom";
 import { useCoordinates } from "../../contexts/CoordinatesContext";
 import { getWeatherData } from "../../services/openWeather";
-import generateImageAccordingWeather from "../../helpers/imageWeather";
+import capitalize from "../../utilities/Capitalize";
 import Spinner from "../../ui/Spinner";
-import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
-
+import WeatherImage from "../../ui/WeatherImage";
 
 
 
@@ -15,23 +15,24 @@ import { useEffect } from "react";
 
 export default function MainWeatherCard() {
 
-    const { city } = useCoordinates();
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const { city } = useCoordinates();
+    const [, setSearchParams] = useSearchParams();
 
     const { data, isPending, error, isError } = useQuery({
         queryKey: ["mainWeather", city],
         queryFn: ({signal}) => getWeatherData(city, signal),
         retry: 2,
     });
+
     const { name, sys, main } = data ?? {};
 
 
-
+    
     useEffect(() => {
         setSearchParams(city);
-        // console.log(searchParams);
     }, [city, setSearchParams])
+
 
 
     
@@ -52,12 +53,11 @@ export default function MainWeatherCard() {
 
         <div className="flex flex-col items-center justify-around h-[80%]" >
 
-            <h2 className="font-light text-2xl md:text-4xl text-center tracking-wider" >{name}-{sys.country}</h2> 
+            <h2 className="font-light text-2xl md:text-4xl text-center tracking-wider" >
+                <Link to={`${city.lat} ${city.lon}`} >{name}-{sys.country}</Link>
+            </h2> 
 
-            <img 
-                src={generateImageAccordingWeather(data.weather[0].icon)} alt={data.weather[0].description} 
-                className="w-1/4 md:w-2/6"
-            />
+            <WeatherImage data={data} className="w-1/4 md:w-2/6" />
 
             <p className="font-normal text-center text-3xl md:text-6xl" >{main.temp}°C</p>
 
@@ -67,7 +67,7 @@ export default function MainWeatherCard() {
         <div className="flex items-center justify-around text-center h-[20%]" >
 
             <div >
-                <p className="text-xs md:text-lg font-light" >{data.weather[0].description}</p>
+                <p className="text-xs md:text-lg font-light" >{capitalize(data.weather[0].description)}</p>
                 <h3 className="text-sm md:text-xl font-bold" >Description</h3>
             </div>
 
