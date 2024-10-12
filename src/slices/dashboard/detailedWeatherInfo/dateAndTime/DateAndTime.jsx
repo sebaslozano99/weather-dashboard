@@ -1,43 +1,39 @@
+import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import getCurrentPositionsTime from "../../../../services/timeApi";
+import Spinner from "../../../../ui/Spinner";
+
+
 
 
 export default function DateAndTime({data}) {
 
   const { coord } = data;
-  const [currentPositionsTime, setCurrentPositionsTime] = useState(null);
-  const [positionTime, setPositionTime] = useState(null); 
+  const [positionTime, setPositionTime] = useState(null); // this is the time's data from the current position fetched from timeApi 2024-10-13T03:18:28.3208866
 
-  const currentPositionsDate = positionTime?.toDateString();
+  const [currentPositionsTime, setCurrentPositionsTime] = useState(null); // once we have positionTime, we create a new Date, based on the positionTime, and crate an interval to display current time of that position
 
-
-
-  // console.log(positionTime);
+  const currentPositionsDate = currentPositionsTime?.toDateString() ?? "";
 
 
-  //we fetch info of the current position's time information
+
+  const { data: timeData, isPending } = useQuery({
+    queryKey: [coord.lat, coord.lon],
+    queryFn: () => getCurrentPositionsTime(coord.lat, coord.lon),
+    refetchOnWindowFocus: false,
+  })
+
+
   useEffect(() => {
-    async function fetchData(){
-      try{
-        const res = await fetch(`https://timeapi.io/api/time/current/coordinate?latitude=${coord.lat}&longitude=${coord.lon}`);
-        const data = await res.json();
-
-        console.log(data);
-        setPositionTime(new Date(data?.dateTime));
-      }
-      catch(err){
-        throw new Error(err);
-      }
-    }
-
-    fetchData();
-
-  }, [coord.lat, coord.lon])
+    if(timeData) setPositionTime(timeData?.dateTime);
+  }, [timeData]);
 
 
 
   useEffect(() => {
-    if(positionTime) setCurrentPositionsTime(new Date(positionTime));
+    if(positionTime) setCurrentPositionsTime(new Date(positionTime)); // we get something like this: Sun Oct 13 2024 03:21:27 GMT-0500 (Colombia Standard Time)
+
   }, [positionTime])
 
 
@@ -46,24 +42,30 @@ export default function DateAndTime({data}) {
     if(!positionTime) return;
 
     const intervalId = setInterval(() => {
-      setCurrentPositionsTime(prevTime => new Date(prevTime.getTime() + 1000));
-      // console.log(currentPositionsTime);
+      setCurrentPositionsTime(prevTime => new Date(prevTime.getTime() + 1000)); //get prev timestamp and add it 1s, every second
     }, 1000);
-
 
     return () => {
       clearInterval(intervalId);
     }
+
   }, [currentPositionsTime, positionTime])
 
 
+
   return (
-    <div className="bg-white/20 col-span-4 row-span-4 rounded-lg" >
-        <h2>{data.name}-{data.sys.country}</h2>
+    <div className="flex flex-col justify-center items-center gap-8 col-span-4 row-span-4 p-4 bg-white/20  rounded-lg" >
+      {
+        isPending ? <Spinner size={8} />  :
+        <>
+          <h2 className="font-semibold text-2xl" >{data.name}-{data.sys.country}</h2>
 
-        <p>{currentPositionsDate}</p>
-
-        <p>{currentPositionsTime?.toLocaleTimeString()}</p>
+          <div className="flex flex-col items-center gap-1" >
+            <p className="font-bold text-6xl" >{currentPositionsTime?.toLocaleTimeString()}</p>
+            <p className="font-normal" >{currentPositionsDate}</p>  
+          </div>
+        </>
+      }
     </div>
   )
 }

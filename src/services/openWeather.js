@@ -8,6 +8,8 @@ async function getWeatherData(city, signal){
 
         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${API_KEY}&units=metric`, { signal } );
 
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
         const data = await res.json();
 
         if(data.name === "") throw new Error("Select a different position in the map!");
@@ -29,6 +31,8 @@ async function cityNameToPosition(cityName, signal){
     try {
         const res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${API_KEY}`, { signal } );
 
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
         const data = await res.json();
 
         return data;
@@ -46,4 +50,25 @@ async function cityNameToPosition(cityName, signal){
 
 
 
-export { getWeatherData, cityNameToPosition };
+async function getFiveDaysForecast(city){
+    try {
+
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&appid=${API_KEY}&units=metric`);
+
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+  
+        const data = await res.json();
+
+        // console.log(data);
+
+        return data.list;
+    }
+    catch(err){
+        throw new Error(err);
+    }
+}
+
+
+
+
+export { getWeatherData, cityNameToPosition, getFiveDaysForecast };
