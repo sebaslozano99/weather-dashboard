@@ -53,12 +53,3 @@ export default function App() {
     </QueryClientProvider>
   )
 }
-
-
-
-
-// bundle size before lazy loading ---------------------------------
-// dist/index.html                   0.86 kB │ gzip:   0.46 kB
-// dist/assets/index-B3VbmN4w.css   10.56 kB │ gzip:   2.90 kB
-// dist/assets/index-Bk2f3edd.js   382.02 kB │ gzip: 118.35 kB
-// bundle size before lazy loading ---------------------------------

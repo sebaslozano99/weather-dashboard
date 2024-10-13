@@ -7,7 +7,6 @@ export default function ForecastItem({info}) {
 
   const forecastDate = new Date(info.dt_txt).toDateString();
 
-//   console.log(forecastDate.toDateString());
 
   return (
     <div className="flex flex-col items-center justify-around flex-shrink-0 p-3 md:p-2 w-full min-[550px]:w-6/12 md:w-auto bg-[#9EB3C2] rounded-xl" >
@@ -18,7 +17,7 @@ export default function ForecastItem({info}) {
         <p className="text-xl md:text-base text-center font-semibold" >{capitalize(info.weather[0]?.description)}</p>
       </div>
 
-      <small className="text-center" >{forecastDate} at 15:00 pm</small>
+      <small className="text-center" >{forecastDate}</small>
     </div>
   )
 }

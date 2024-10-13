@@ -33,7 +33,7 @@ export default function DetailedWeatherInfo() {
   if(isError) return <p>{error.error || error.description || error.message}</p>
 
   return (
-    <div className={`flex flex-col md:grid md:grid-cols-10 md:grid-rows-8 gap-4 p-4 w-full md:min-h-[90vh]`} >
+    <div className={`flex flex-col md:grid md:grid-cols-10 md:grid-rows-12 gap-4 p-4 w-full md:h-[160vh]`} >
 
       <DateAndTime data={data} />
 
