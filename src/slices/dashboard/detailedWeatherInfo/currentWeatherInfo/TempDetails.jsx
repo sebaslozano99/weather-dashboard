@@ -11,7 +11,7 @@ export default function TempDetails({data}) {
         <div className="flex flex-col items-center gap-4 sm:gap-2  text-center" >
 
             <h2 className="text-4xl font-semibold" >{data?.main.temp}°C</h2>
-            <p>Feels like: {data?.main.feels_like}°C</p>
+            <p><span className="font-semibold" >Feels like:</span> {data?.main.feels_like}°C</p>
 
         </div>
 

@@ -33,7 +33,7 @@ export default function DetailedWeatherInfo() {
   if(isError) return <p>{error.error || error.description || error.message}</p>
 
   return (
-    <div className={`flex flex-col md:grid md:grid-cols-10 md:grid-rows-8 gap-4 p-4 w-full md:h-[90vh] border-4 border-red-800`} >
+    <div className={`flex flex-col md:grid md:grid-cols-10 md:grid-rows-8 gap-4 p-4 w-full md:min-h-[90vh]`} >
 
       <DateAndTime data={data} />
 
@@ -41,15 +41,11 @@ export default function DetailedWeatherInfo() {
         <TempDetails data={data} />
 
         <div className="flex flex-col justify-center items-center" >
-          <WeatherImage data={data} className="w-6/12 sm:w-9/12"  />
+          <WeatherImage data={data} className="w-6/12 sm:w-8/12"  />
           <p className="font-semibold text-xl min-[924px]:text-2xl text-center" >{capitalize(data?.weather[0]?.description)}</p>
         </div>
 
         <MoreWeatherInfo data={data} />
-      </div>
-
-      <div className="bg-black text-white col-span-2 row-span-4 rounded-lg" >
-        Maybe hourly forecast
       </div>
 
       <FiveDaysForecast city={city} />

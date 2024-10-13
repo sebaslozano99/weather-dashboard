@@ -54,15 +54,15 @@ export default function DateAndTime({data}) {
 
 
   return (
-    <div className="flex flex-col justify-center items-center gap-8 col-span-3 row-span-4 p-4 bg-white/20  rounded-lg" >
+    <div className="flex flex-col justify-center items-center gap-8 col-span-3 row-span-4 p-4 bg-white/20 shadow-2xl  rounded-lg" >
       {
         isPending ? <Spinner size={8} />  :
         <>
-          <h2 className="font-semibold text-2xl" >{data.name}-{data.sys.country}</h2>
+          <h2 className="font-semibold text-center text-2xl md:text-xl lg:text-2xl" >{data.name}-{data.sys.country}</h2>
 
           <div className="flex flex-col items-center gap-1" >
 
-            <p className="font-bold text-5xl min-[768px]:text-3xl min-[813px]:text-4xl lg:text-5xl">{currentPositionsTime?.toLocaleTimeString()}</p>
+            <p className="font-bold text-5xl md:text-3xl lg:text-4xl">{currentPositionsTime?.toLocaleTimeString()}</p>
 
             <p className="font-normal" >{currentPositionsDate}</p>  
 
