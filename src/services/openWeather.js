@@ -3,10 +3,10 @@
 const API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
 
-async function getWeatherData(city, signal){
+async function getWeatherData(position, signal){
     try {
 
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${API_KEY}&units=metric`, { signal } );
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.lat}&lon=${position.lon}&appid=${API_KEY}&units=metric`, { signal } );
 
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 

@@ -8,6 +8,7 @@ import capitalize from "../../../utilities/Capitalize";
 import MoreWeatherInfo from "./currentWeatherInfo/MoreWeatherInfo";
 import DateAndTime from "./dateAndTime/DateAndTime";
 import FiveDaysForecast from "./fiveDaysForecast/FiveDaysForecast";
+import Spinner from "../../../ui/Spinner";
 
 
 
@@ -15,7 +16,7 @@ export default function DetailedWeatherInfo() {
 
   const { moreInfo } = useParams();
 
-  const city = { 
+  const position = { 
     lat: +moreInfo.slice(0, moreInfo.indexOf(" ")),
     lon: +moreInfo.slice(moreInfo.indexOf(" ")),
   }
@@ -23,14 +24,20 @@ export default function DetailedWeatherInfo() {
 
   const { data,  isPending, error,  isError } = useQuery({
     queryKey: ["mainWeather"],
-    queryFn: ({signal}) => getWeatherData(city, signal),
+    queryFn: ({signal}) => getWeatherData(position, signal),
     retry: 2,
   });
 
 
 
-  if(isPending) return <p>Loading...</p>
-  if(isError) return <p>{error.error || error.description || error.message}</p>
+  if(isPending) return <div className={`flex flex-col items-center w-full h-[90vh]`} >
+    <Spinner size={15} />
+  </div>
+
+
+  if(isError) return <div className={`flex flex-col items-center w-full h-[90vh]`}>{error.error || error.description || error.message}</div>
+
+  
 
   return (
     <div className={`flex flex-col md:grid md:grid-cols-10 md:grid-rows-12 gap-4 p-4 w-full md:h-[160vh]`} >
@@ -48,7 +55,7 @@ export default function DetailedWeatherInfo() {
         <MoreWeatherInfo data={data} />
       </div>
 
-      <FiveDaysForecast city={city} />
+      <FiveDaysForecast position={position} />
         
     </div>
   )

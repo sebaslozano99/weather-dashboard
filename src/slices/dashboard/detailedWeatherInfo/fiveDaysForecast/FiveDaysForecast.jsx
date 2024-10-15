@@ -8,12 +8,12 @@ import Chart from "./chart";
 
 
 
-export default function FiveDaysForecast({city}) {
+export default function FiveDaysForecast({position}) {
 
 
   const { data, error, isError, isPending } = useQuery({
     queryKey: ["fiveDaysForecast"],
-    queryFn: () => getFiveDaysForecast(city),
+    queryFn: () => getFiveDaysForecast(position),
     refetchOnWindowFocus: false,
   })
 
@@ -32,7 +32,7 @@ export default function FiveDaysForecast({city}) {
 
 
   return (
-    <div className="col-span-10 row-span-8 flex flex-col gap-4 p-4 bg-white/20 rounded-lg shadow-2xl border-2 border-red-500" >
+    <div className="col-span-10 row-span-8 flex flex-col gap-4 p-4 bg-white/20 rounded-lg shadow-2xl" >
 
       <h3 className="text-center font-bold text-2xl" >5 days weather forecast</h3>
 
@@ -46,7 +46,7 @@ export default function FiveDaysForecast({city}) {
         }
       </div>
 
-      <div className="flex justify-center items-center w-full h-[45%] border-4 border-purple-600" >
+      <div className="flex justify-center items-center w-full h-[45%]" >
         <Chart data={fiveDaysToDisplay} />
       </div>
       
@@ -55,6 +55,6 @@ export default function FiveDaysForecast({city}) {
 }
 
 FiveDaysForecast.propTypes = {
-    city: PropTypes.object,
+  position: PropTypes.object,
 }
 
