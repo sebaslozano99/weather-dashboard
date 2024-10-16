@@ -10,6 +10,8 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Users = lazy(() => import("./pages/Users"));
 const MyWeather = lazy(() => import("./pages/MyWeather"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const CreateAccount = lazy(() => import("./pages/CreateAccount"));
+
 
 import Applayout from "./ui/Applayout";
 import DetailedWeatherInfo from "./slices/dashboard/detailedWeatherInfo/DetailedWeatherInfo";
@@ -42,6 +44,7 @@ export default function App() {
                     <Route index element={ <Navigate replace to="homepage"  /> } />
                     <Route path="/homepage" element={ <Homepage /> }  />
                     <Route path="/users" element={ <Users /> } />
+                    <Route path="/signup" element={ <CreateAccount /> } />
                     <Route path="/dashboard" element={ <Dashboard /> } />
                     <Route path="/dashboard/:moreInfo" element={ <DetailedWeatherInfo /> } />
                     <Route path="/myWeather" element={ <MyWeather /> } />

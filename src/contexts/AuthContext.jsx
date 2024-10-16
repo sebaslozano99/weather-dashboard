@@ -12,8 +12,6 @@ const AuthContext = createContext();
 
 const initialState = {
     user: null,
-    // error: "",
-    // isLoading: false,
 }
 
 
@@ -32,19 +30,6 @@ function reducer(state, action){
                 isLoading: false,
                 user: null,
             };
-        
-        // case "error/newError":
-        //     return {
-        //         ...state,
-        //         isLoading: false,
-        //         error: action.payload,
-        //     };
-        
-        // case "isLoading/loading":
-        //     return {
-        //         ...state, 
-        //         isLoading: true,
-        //     };
 
         default: throw new Error("unknown action type!");
     }
