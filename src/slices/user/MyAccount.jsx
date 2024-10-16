@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { logOut } from "../../services/supabase";
-import { UseAuthContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext";
 import ManageInfo from "./ManageInfo";
 import DeleteAccount from "./DeleteAccount";
 import Spinner from "../../ui/Spinner";
@@ -12,7 +12,7 @@ import Spinner from "../../ui/Spinner";
 export default function MyAccount() {
 
   const [showDeleteAccount, setShowDeleteAccount] = useState(false);
-  const { user } = UseAuthContext();
+  const { user } = useAuthContext();
   const { mutate: handleLogOut, isPending, isError, error } = useMutation({
     mutationFn: logOut,    
   });

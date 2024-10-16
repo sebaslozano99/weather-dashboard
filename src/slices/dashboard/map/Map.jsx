@@ -22,15 +22,16 @@ export default function Map() {
     if(error) toast.error(error.message);
   }, [error])
 
+
   return (
       <div className={`relative w-full md:w-6/12 h-1/2 md:h-full`} >
 
         { !geoLocationPosition && 
           <button 
             onClick={() => getGeoLocation(setCity)}
-            className="absolute bottom-2 left-2 z-50 flex items-center gap-2 bg-[#21295C] text-white px-2 py-1 rounded-2xl" 
+            className="absolute bottom-2 left-2 z-50 flex justify-center gap-2 px-2 py-1.5 text-white min-w-16 bg-[#21295C] rounded-2xl" 
           >
-            <FaLocationCrosshairs /> { isLoading ? "Loading..." : "Get my location"}
+           { isLoading ? "Loading..." : <FaLocationCrosshairs size={22} /> }
           </button>
         }
 

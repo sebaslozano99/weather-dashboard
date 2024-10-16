@@ -62,10 +62,10 @@ function AuthProvider({children}) {
   )
 }
 
-export { AuthProvider, UseAuthContext }
+export { AuthProvider, useAuthContext }
 
 
-function UseAuthContext(){
+function useAuthContext(){
     const context = useContext(AuthContext);
     if(context === undefined) throw new Error("UseAuthContext is being used outside AuthProvier wrapper!");
     return context;

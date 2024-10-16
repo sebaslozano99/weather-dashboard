@@ -85,4 +85,33 @@ async function logOut(){
 }
 
 
-export { signUp, logIn, logOut }
+
+
+
+
+
+async function addToWeatherList(latitude, longitude, user_id){
+    try {
+        const { data, error } = await supabase
+        .from('myWeathers')
+        .insert([{ latitude, longitude, user_id }])
+
+        if(error){
+            throw new Error(error.message || "Something went wrong adding the data!");
+        }
+
+        console.log(data);
+        return data;
+    }
+    catch(err){
+        throw new Error(err);
+    }
+}
+
+
+
+
+
+
+
+export { signUp, logIn, logOut, addToWeatherList }

@@ -30,7 +30,7 @@ export default function DetailedWeatherInfo() {
 
 
 
-  if(isPending) return <div className={`flex flex-col items-center w-full h-[90vh]`} >
+  if(isPending) return <div className={`flex flex-col items-center justify-center w-full h-[90vh]`} >
     <Spinner size={15} />
   </div>
 
