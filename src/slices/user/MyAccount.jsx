@@ -4,6 +4,7 @@ import { logOut } from "../../services/supabase";
 import { UseAuthContext } from "../../contexts/AuthContext";
 import ManageInfo from "./ManageInfo";
 import DeleteAccount from "./DeleteAccount";
+import Spinner from "../../ui/Spinner";
 
 
 
@@ -25,11 +26,11 @@ export default function MyAccount() {
             <h2>Welcome back, <b>{user.user_metadata.username}</b></h2>
 
             <button
-                className="bg-[#21295C] text-white px-5 py-1 border-none rounded-3xl outline-none"
+                className="flex justify-center px-5 py-2 text-sm text-white min-w-20 bg-[#21295C]  border-none rounded-3xl outline-none"
                 onClick={handleLogOut}
                 disabled={isPending}
             >
-                { isPending ? "Loading" : "Sign out" }
+                { isPending ? <Spinner  size={1} type="secondary" /> : "Sign out" }
             </button>
 
         </div>

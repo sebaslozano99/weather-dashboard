@@ -8,7 +8,6 @@ import StyledInput from "../../ui/StyledInput"
 
 
 
-
 export default function LogIn() {
 
   const navigate = useNavigate();

@@ -20,19 +20,19 @@ export default function SearchBar() {
 
   return (
     <form 
-        onSubmit={(e) => e.preventDefault()}
-        className="relative w-full" 
-      >
-        <input 
-          type="text" 
-          placeholder="search by name..." 
-          className="py-1 px-3 w-full outline-none rounded-xl"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)} 
-        />
+      onSubmit={(e) => e.preventDefault()}
+      className="relative w-full" 
+    >
+      <input 
+        type="text" 
+        placeholder="search by name..." 
+        className="py-1 px-3 w-full outline-none rounded-xl"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)} 
+      />
 
-        <SuggestionsContainer locations={data} isPending={isPending} />
+      <SuggestionsContainer locations={data} isPending={isPending} />
 
-      </form> 
+    </form> 
   )
 }

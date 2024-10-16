@@ -1,21 +1,40 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import { useCoordinates } from "../../../contexts/CoordinatesContext";
+import { FaLocationCrosshairs } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import useGeolocation from "../../../hooks/useGeolocation";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 
 
 
-// border-2 border-green-800
+
 
 export default function Map() {
 
-  const { city } = useCoordinates();
+  const { city, setCity } = useCoordinates();
+  const { getGeoLocation, position: geoLocationPosition, isLoading, error } = useGeolocation();
 
+
+
+  useEffect(() => {
+    if(error) toast.error(error.message);
+  }, [error])
 
   return (
-      <div className={`w-full md:w-6/12 h-1/2 md:h-full`} >
+      <div className={`relative w-full md:w-6/12 h-1/2 md:h-full`} >
 
-        <MapContainer center={[city.lat, city.lon]} zoom={6} scrollWheelZoom={true} className="h-full" >
+        { !geoLocationPosition && 
+          <button 
+            onClick={() => getGeoLocation(setCity)}
+            className="absolute bottom-2 left-2 z-50 flex items-center gap-2 bg-[#21295C] text-white px-2 py-1 rounded-2xl" 
+          >
+            <FaLocationCrosshairs /> { isLoading ? "Loading..." : "Get my location"}
+          </button>
+        }
+
+        <MapContainer center={[city.lat, city.lon]} zoom={6} scrollWheelZoom={true} className="z-10 h-full" >
 
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -40,11 +59,10 @@ export default function Map() {
 
 
 
-
+//get position (lat and lon) from the map on click
 function DetectClick(){
   
   const { setCity } = useCoordinates();
-
   useMapEvents({
     click: (e) => {
       // console.log(e);
@@ -53,7 +71,7 @@ function DetectClick(){
   })
 }
 
-
+// re-render the map when new position received
 function ChangePosition({position}){
   const map = useMap();
   map.setView(position);

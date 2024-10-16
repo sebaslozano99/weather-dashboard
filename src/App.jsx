@@ -16,6 +16,7 @@ const CreateAccount = lazy(() => import("./pages/CreateAccount"));
 import Applayout from "./ui/Applayout";
 import DetailedWeatherInfo from "./slices/dashboard/detailedWeatherInfo/DetailedWeatherInfo";
 import LazySpinner from "./ui/LazySpinner";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -58,6 +59,10 @@ export default function App() {
           </CoordinatesProvider>
         </SearchProvider> 
       </AuthProvider>
+
+      <Toaster toastOptions={{
+        duration: 2000,
+      }} />
 
     </QueryClientProvider>
   )

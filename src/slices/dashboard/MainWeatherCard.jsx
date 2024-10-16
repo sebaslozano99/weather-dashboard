@@ -26,8 +26,6 @@ export default function MainWeatherCard() {
     });
 
     const { name, sys, main } = data ?? {};
-
-
     
     useEffect(() => {
         setSearchParams(city);
