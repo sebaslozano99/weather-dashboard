@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-
+import { AuthProvider } from "./contexts/AuthContext";
 import { CoordinatesProvider } from "./contexts/CoordinatesContext";
 import { SearchProvider } from "./contexts/SearchContext";
 
@@ -16,7 +16,7 @@ const CreateAccount = lazy(() => import("./pages/CreateAccount"));
 import Applayout from "./ui/Applayout";
 import DetailedWeatherInfo from "./slices/dashboard/detailedWeatherInfo/DetailedWeatherInfo";
 import LazySpinner from "./ui/LazySpinner";
-import { AuthProvider } from "./contexts/AuthContext";
+
 
 
 
@@ -27,6 +27,7 @@ const queryClient = new QueryClient({
     }
   }
 });
+
 
 
 export default function App() {

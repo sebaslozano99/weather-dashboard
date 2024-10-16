@@ -30,7 +30,7 @@ export default function LogIn() {
 
 
   return (
-    <form className={`flex flex-col gap-6 p-8 w-6/12 bg-white/70 shadow-md rounded-xl`} onSubmit={onLogIn}  >
+    <form className={`flex flex-col justify-center gap-6 p-8 sm:h-5/6 md:h-auto w-11/12 md:w-6/12 bg-white/70 shadow-md rounded-xl`} onSubmit={onLogIn}  >
 
       <h2 className="font-bold text-3xl text-center" >Log in to your account</h2>
 
