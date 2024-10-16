@@ -30,7 +30,7 @@ export default function LogIn() {
 
 
   return (
-    <form className={`flex flex-col gap-6 p-8 w-7/12 bg-white/70 shadow-md rounded-xl`} onSubmit={onLogIn}  >
+    <form className={`flex flex-col gap-6 p-8 w-6/12 bg-white/70 shadow-md rounded-xl`} onSubmit={onLogIn}  >
 
       <h2 className="font-bold text-3xl text-center" >Log in to your account</h2>
 
@@ -53,9 +53,14 @@ export default function LogIn() {
       { isError && <p className="text-xs text-red-500" >{error.message}</p> }
 
       <div className="flex justify-center gap-6 w-full">
-        <button className={`flex justify-center items-center px-4 py-2 w-full text-white bg-[#1B3B6F] hover:shadow-lg`} >
+
+        <button 
+          className={`flex justify-center items-center px-4 py-2 w-full text-white bg-[#1B3B6F] hover:shadow-lg`} 
+          disabled={isPending} 
+        >
           { isPending ? <Spinner size={1} type="secondary" /> : "Log in" }
         </button>
+
       </div>
 
     </form>

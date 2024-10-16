@@ -8,7 +8,7 @@ export default function NavBar() {
       <ul className="flex gap-10" >
         <StyledNavlink to="/dashboard" >Dashboard</StyledNavlink>
         <StyledNavlink to="/myWeather" >My Weather</StyledNavlink>
-        <StyledNavlink to="/users" >Account</StyledNavlink>
+        <StyledNavlink to="/account" >Account</StyledNavlink>
       </ul>
     </nav>
   )

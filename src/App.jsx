@@ -7,7 +7,7 @@ import { SearchProvider } from "./contexts/SearchContext";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-const Users = lazy(() => import("./pages/Users"));
+const Account = lazy(() => import("./pages/Account"));
 const MyWeather = lazy(() => import("./pages/MyWeather"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const CreateAccount = lazy(() => import("./pages/CreateAccount"));
@@ -43,7 +43,7 @@ export default function App() {
                   <Route element={ <Applayout /> } >
                     <Route index element={ <Navigate replace to="homepage"  /> } />
                     <Route path="/homepage" element={ <Homepage /> }  />
-                    <Route path="/users" element={ <Users /> } />
+                    <Route path="/account" element={ <Account /> } />
                     <Route path="/signup" element={ <CreateAccount /> } />
                     <Route path="/dashboard" element={ <Dashboard /> } />
                     <Route path="/dashboard/:moreInfo" element={ <DetailedWeatherInfo /> } />

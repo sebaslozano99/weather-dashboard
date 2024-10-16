@@ -31,7 +31,7 @@ export default function SignUp() {
 
 
   return (
-    <form className={`flex flex-col gap-6 p-8 w-7/12 bg-white/70 shadow-md rounded-xl`} onSubmit={onSubmit} >
+    <form className={`flex flex-col gap-6 p-8 w-6/12 bg-white/70 shadow-md rounded-xl`} onSubmit={onSubmit} >
 
       <h2 className="font-bold text-3xl text-center" >Create your account</h2>
 
