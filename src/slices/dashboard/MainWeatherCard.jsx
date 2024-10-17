@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Link, useSearchParams } from "react-router-dom";
 import { useCoordinates } from "../../contexts/CoordinatesContext";
-import { getWeatherData } from "../../services/openWeather";
+import useGetWeatherInfoOfPosition from "../useGetWeatherInfoOfPosition";
 import capitalize from "../../utilities/Capitalize";
 import Spinner from "../../ui/Spinner";
 import WeatherImage from "../../ui/WeatherImage";
@@ -10,24 +9,13 @@ import AddWeatherBtn from "./AddWeatherBtn";
 
 
 
-// border-2 border-red-500
-
-
 
 export default function MainWeatherCard() {
 
     const { city } = useCoordinates();
     const [, setSearchParams] = useSearchParams();
-
-    const { data, isPending, error, isError } = useQuery({
-        queryKey: ["mainWeather", city],
-        queryFn: ({signal}) => getWeatherData(city, signal),
-        retry: 2,
-        refetchOnWindowFocus: false,
-    });
-
+    const { data, isPending, error, isError } = useGetWeatherInfoOfPosition(city)
     const { name, sys, main } = data ?? {};
-
     
     useEffect(() => {
         setSearchParams(city);

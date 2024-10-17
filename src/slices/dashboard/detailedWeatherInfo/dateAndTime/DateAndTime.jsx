@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import getCurrentPositionsTime from "../../../../services/timeApi";
+import useGetPositionsTime from "../../../useGetPositionsTime";
+import PropTypes from "prop-types";
 import Spinner from "../../../../ui/Spinner";
+// import toast from "react-hot-toast";
 
 
 
@@ -10,6 +10,9 @@ import Spinner from "../../../../ui/Spinner";
 export default function DateAndTime({data}) {
 
   const { coord } = data;
+
+  const { data: timeData, isPending } = useGetPositionsTime(coord.lat, coord.lon, coord); //custom query hook
+
   const [positionTime, setPositionTime] = useState(null); // this is the time's data from the current position fetched from timeApi -- i.e: 2024-10-13T03:18:28.3208866
 
   const [currentPositionsTime, setCurrentPositionsTime] = useState(null); // once we have positionTime, we create a new Date, based on the positionTime, and crate an interval to display current time of that position
@@ -18,11 +21,9 @@ export default function DateAndTime({data}) {
 
 
 
-  const { data: timeData, isPending } = useQuery({
-    queryKey: [coord.lat, coord.lon],
-    queryFn: () => getCurrentPositionsTime(coord.lat, coord.lon),
-    refetchOnWindowFocus: false,
-  })
+  // useEffect(() => {
+  //   if(isError) toast.error(error?.message || error?.description);
+  // }, [isError, error?.message, error?.description])
 
 
   useEffect(() => {
@@ -30,12 +31,10 @@ export default function DateAndTime({data}) {
   }, [timeData]);
 
 
-
   useEffect(() => {
     if(positionTime) setCurrentPositionsTime(new Date(positionTime)); // we get something like this: Sun Oct 13 2024 03:21:27 GMT-0500 (Colombia Standard Time)
 
   }, [positionTime])
-
 
 
   useEffect(() => {

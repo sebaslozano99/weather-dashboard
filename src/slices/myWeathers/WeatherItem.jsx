@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getWeatherData } from "../../services/openWeather";
 import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
+import useGetPositionsTime from "../useGetPositionsTime";
 import PropTypes from "prop-types";
 import Spinner from "../../ui/Spinner";
 import WeatherImage from "../../ui/WeatherImage";
-import getCurrentPositionsTime from "../../services/timeApi";
+import useGetWeatherInfoOfPosition from "../useGetWeatherInfoOfPosition";
 
 
 const options = {
@@ -15,25 +14,13 @@ const options = {
     month: 'long',
     day: 'numeric',
   };
+  
 
 export default function WeatherItem({position}) {
 
-    const [dateOfCity, setDateOfCity] = useState(null);
-
-    const { data: timeData, isPending: isPendingTime } = useQuery({
-        queryKey: [position],
-        queryFn: () => getCurrentPositionsTime(position.latitude, position.longitude),
-        refetchOnWindowFocus: false,
-    })
-  
-  
-  const { data, isPending } = useQuery({
-    queryKey: ["positionWeather", position],
-    queryFn: ({signal}) => getWeatherData({lat: position.latitude, lon: position.longitude}, signal),
-    retry: 2,
-    refetchOnWindowFocus: false,
-  })
-
+  const [dateOfCity, setDateOfCity] = useState(null);
+  const { data: timeData, isPending: isPendingTime } = useGetPositionsTime(position.lat, position.lon, position);
+  const { data, isPending } = useGetWeatherInfoOfPosition(position);
   const formattedDate = new Date(dateOfCity).toLocaleDateString("en-US", options);
 
 
@@ -41,10 +28,12 @@ export default function WeatherItem({position}) {
     if(timeData) setDateOfCity(timeData.date);
   }, [timeData])
 
+
  
 
-
-  if(isPending) return <Spinner size={10} />
+  if(isPending) return <div className="flex justify-center items-center p-8 bg-white/20 shadow-2xl rounded-md" >
+    <Spinner size={10} />
+  </div>
 
   return (
     <div className="flex justify-between p-8 bg-white/20 shadow-2xl rounded-md" >
@@ -61,7 +50,7 @@ export default function WeatherItem({position}) {
 
                 <Link 
                     className="flex items-center  gap-3 text-white text-xs py-1.5 px-2 max-w-max bg-[#21295C] rounded-2xl" 
-                    to={`/dashboard/${position.latitude} ${position.longitude}`} >
+                    to={`/dashboard/${position.lat} ${position.lon}`} >
                     Details
                 </Link>
 

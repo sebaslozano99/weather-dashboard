@@ -1,7 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getWeatherData } from "../../../services/openWeather";
 
+import useGetWeatherInfoOfPosition from "../../useGetWeatherInfoOfPosition";
 import TempDetails from "./currentWeatherInfo/TempDetails";
 import WeatherImage from "../../../ui/WeatherImage";
 import capitalize from "../../../utilities/Capitalize";
@@ -19,16 +18,19 @@ export default function DetailedWeatherInfo() {
   const position = { 
     lat: +moreInfo.slice(0, moreInfo.indexOf(" ")),
     lon: +moreInfo.slice(moreInfo.indexOf(" ")),
-  }
+  };
+
+  const { data, isPending, error, isError } = useGetWeatherInfoOfPosition(position);
+
+  // const { data,  isPending, error,  isError } = useQuery({
+  //   queryKey: ["mainWeather"],
+  //   queryFn: ({signal}) => getWeatherData(position, signal),
+  //   retry: 2,
+  // });
 
 
-  const { data,  isPending, error,  isError } = useQuery({
-    queryKey: ["mainWeather"],
-    queryFn: ({signal}) => getWeatherData(position, signal),
-    retry: 2,
-  });
 
-
+  
 
   if(isPending) return <div className={`flex flex-col items-center justify-center w-full h-[90vh]`} >
     <Spinner size={15} />

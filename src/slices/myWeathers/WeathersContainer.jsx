@@ -18,11 +18,11 @@ export default function WeathersContainer() {
 
 
   return (
-    <div className={`grid md:grid-cols-2 grid-rows-[minmax(250px, 1fr] auto-rows-[minmax(250px, 1fr)] gap-6 w-full h-full`} >
+    <div className={`grid md:grid-cols-2 grid-rows-[minmax(300px, 1fr] auto-rows-[minmax(300px, 1fr)] gap-6 w-full h-full`} >
 
       { !user && "Create an account and start saving yout important weather information!" }
       { !data || data.length === 0 && "Start adding weather information of cities!" }
-      { data && data.map((item) =>  <WeatherItem key={item.id} position={{latitude: item.latitude, longitude: item.longitude}} /> ) }
+      { data && data.map((item) =>  <WeatherItem key={item.id} position={{lat: item.latitude, lon: item.longitude}} /> ) }
 
     </div>
   )
