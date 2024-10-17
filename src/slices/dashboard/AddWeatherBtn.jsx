@@ -18,22 +18,22 @@ export default function AddWeatherBtn({city, city_name, country_code}) {
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: ["usersWeather"],
+    queryKey: ["usersWeather", user],
     queryFn: () => fetchUsersWeatherList(user.id),
     refetchOnWindowFocus: false,
     enabled: user !== null,
   })
 
-
   const { mutate: addWeather, isPending: isAddingWeather  } = useMutation({
     mutationFn: () => addToWeatherList(city_name, country_code, city.lat, city.lon, user.id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["usersWeather"] });
+      queryClient.invalidateQueries({ queryKey: ["usersWeather", user] });
       toast.success("Added successfully!");
     },
     onError: (err) => toast.error(err.message || err.description || "Something went wrong adding this weather!"),
     refetchOnWindowFocus: false,
   });
+  
 
   const isThisCityAlreadyIncluded = data?.find((item) => item.city_name === city_name && item.country_code === country_code ); //There might be cases in which there is a city with the same name as another within the same Country but in a different state, in that case, user should be able to add it to their list, but since neither the weather api nor the map proportionates the state name, so far I don't a way to differenciate.
 

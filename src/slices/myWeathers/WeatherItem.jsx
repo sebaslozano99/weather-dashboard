@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Spinner from "../../ui/Spinner";
 import WeatherImage from "../../ui/WeatherImage";
 import useGetWeatherInfoOfPosition from "../useGetWeatherInfoOfPosition";
+import DeleteWeatherBtn from "./DeleteWeatherBtn";
 
 
 const options = {
@@ -16,11 +17,11 @@ const options = {
   };
   
 
-export default function WeatherItem({position}) {
+export default function WeatherItem({position, id}) {
 
   const [dateOfCity, setDateOfCity] = useState(null);
-  const { data: timeData, isPending: isPendingTime } = useGetPositionsTime(position.lat, position.lon, position);
-  const { data, isPending } = useGetWeatherInfoOfPosition(position);
+  const { data: timeData, isPending: isPendingTime } = useGetPositionsTime(position.lat, position.lon, position); //fetch time of specific position
+  const { data, isPending } = useGetWeatherInfoOfPosition(position); //fetch current weather data of specific position
   const formattedDate = new Date(dateOfCity).toLocaleDateString("en-US", options);
 
 
@@ -36,7 +37,9 @@ export default function WeatherItem({position}) {
   </div>
 
   return (
-    <div className="flex justify-between p-8 bg-white/20 shadow-2xl rounded-md" >
+    <div className="relative flex justify-between p-8 bg-white/20 shadow-2xl rounded-md" >
+
+       <DeleteWeatherBtn id={id} /> 
 
         <div className="flex flex-col justify-between md:w-[50%] lg:w-[40%] h-full" >
 
@@ -96,4 +99,5 @@ export default function WeatherItem({position}) {
 
 WeatherItem.propTypes = {
     position: PropTypes.object,
+    id: PropTypes.number,
 }

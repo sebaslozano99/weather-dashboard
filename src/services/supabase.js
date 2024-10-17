@@ -115,7 +115,7 @@ async function addToWeatherList(city_name, country_code, latitude, longitude, us
         .insert([{ city_name, country_code, latitude, longitude, user_id }])
 
         if(error){
-            throw new Error(error.message || "Something went wrong adding the data!");
+            throw new Error(error.message || "Something went wrong adding weather information!");
         }
 
         // console.log(data);  
@@ -129,7 +129,24 @@ async function addToWeatherList(city_name, country_code, latitude, longitude, us
 
 
 
+async function deleteWeatherInfoFromList(id){
+    try{
+        const { error } = await supabase
+        .from('myWeathers')
+        .delete()
+        .eq("id", id);
+
+        if(error){
+            throw new Error(error.message || "Something went wrong while deleting the weatherinformation")
+        }
+    }
+    catch(error){
+        throw new Error(error);
+    }
+}
 
 
 
-export { signUp, logIn, logOut, fetchUsersWeatherList, addToWeatherList }
+
+
+export { signUp, logIn, logOut, fetchUsersWeatherList, addToWeatherList, deleteWeatherInfoFromList }
