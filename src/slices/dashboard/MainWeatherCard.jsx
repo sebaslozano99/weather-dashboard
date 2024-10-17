@@ -22,7 +22,6 @@ export default function MainWeatherCard() {
     }, [city, setSearchParams])
 
 
-
     
     if(isPending) return(
         <div className="flex justify-center items-center gap-1 w-full h-full shadow-xl bg-white/20 rounded-2xl" >
