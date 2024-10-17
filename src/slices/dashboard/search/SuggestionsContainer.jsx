@@ -15,7 +15,7 @@ export default function SuggestionsContainer({locations, isPending}) {
 
 
   return (
-    <div className="absolute w-full mt-1 bg-white rounded-lg" >  
+    <div className="absolute z-50 w-full mt-1 bg-white rounded-lg" >  
       {
         locations?.map((location) =>
           

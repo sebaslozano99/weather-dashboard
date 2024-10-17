@@ -108,17 +108,17 @@ async function fetchUsersWeatherList(user_id){
 
 
 
-async function addToWeatherList(latitude, longitude, user_id){
+async function addToWeatherList(city_name, country_code, latitude, longitude, user_id){
     try {
         const { data, error } = await supabase
         .from('myWeathers')
-        .insert([{ latitude, longitude, user_id }])
+        .insert([{ city_name, country_code, latitude, longitude, user_id }])
 
         if(error){
             throw new Error(error.message || "Something went wrong adding the data!");
         }
 
-        console.log(data);
+        // console.log(data);  
         return data;
     }
     catch(err){

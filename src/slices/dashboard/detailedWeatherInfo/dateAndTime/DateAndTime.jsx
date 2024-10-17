@@ -10,7 +10,7 @@ import Spinner from "../../../../ui/Spinner";
 export default function DateAndTime({data}) {
 
   const { coord } = data;
-  const [positionTime, setPositionTime] = useState(null); // this is the time's data from the current position fetched from timeApi 2024-10-13T03:18:28.3208866
+  const [positionTime, setPositionTime] = useState(null); // this is the time's data from the current position fetched from timeApi -- i.e: 2024-10-13T03:18:28.3208866
 
   const [currentPositionsTime, setCurrentPositionsTime] = useState(null); // once we have positionTime, we create a new Date, based on the positionTime, and crate an interval to display current time of that position
 

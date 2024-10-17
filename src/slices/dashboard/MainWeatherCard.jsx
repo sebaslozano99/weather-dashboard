@@ -28,7 +28,6 @@ export default function MainWeatherCard() {
 
     const { name, sys, main } = data ?? {};
 
-
     
     useEffect(() => {
         setSearchParams(city);
@@ -52,7 +51,7 @@ export default function MainWeatherCard() {
   return (
     <div className="relative flex flex-col gap-4 md:gap-2 py-4 px-2 md:py-10 md:px-4 w-full h-full md:h-full shadow-xl bg-white/20 rounded-2xl" >
 
-        <AddWeatherBtn city={city} />
+        <AddWeatherBtn city={city} city_name={name} country_code={sys.country} />
 
         <div className="flex flex-col items-center justify-around h-[80%]" >
 

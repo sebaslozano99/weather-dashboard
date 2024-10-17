@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { fetchUsersWeatherList } from "../../services/supabase";
-import { useEffect } from "react";
+import WeatherItem from "./WeatherItem";
 
 
 
@@ -16,14 +16,14 @@ export default function WeathersContainer() {
   })
 
 
-  useEffect(() => {
-    console.log(data);
-    console.log("user id", user?.id);
-  }, [data, user?.id])
 
   return (
-    <div className={`w-full h-full`} >
+    <div className={`grid md:grid-cols-2 grid-rows-[minmax(250px, 1fr] auto-rows-[minmax(250px, 1fr)] gap-6 w-full h-full`} >
+
+      { !user && "Create an account and start saving yout important weather information!" }
       { !data || data.length === 0 && "Start adding weather information of cities!" }
+      { data && data.map((item) =>  <WeatherItem key={item.id} position={{latitude: item.latitude, longitude: item.longitude}} /> ) }
+
     </div>
   )
 }

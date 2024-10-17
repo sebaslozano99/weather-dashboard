@@ -25,7 +25,7 @@ export default function SearchBar() {
     >
       <input 
         type="text" 
-        placeholder="search by name..." 
+        placeholder="search location here..." 
         className="py-1 px-3 w-full outline-none rounded-xl"
         value={search}
         onChange={(e) => setSearch(e.target.value)} 
