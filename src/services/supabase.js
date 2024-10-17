@@ -87,6 +87,24 @@ async function logOut(){
 
 
 
+async function fetchUsersWeatherList(user_id){
+    try {
+
+        const { data: myWeathers, error } = await supabase
+        .from('myWeathers')
+        .select('*')
+        .eq("user_id", user_id);
+
+        if(error){
+            throw new Error(error.message || error.description || "Something went wrong fetching the data!");
+        }
+
+        return myWeathers;
+    }
+    catch(error){
+        throw new Error(error);
+    }
+}
 
 
 
@@ -114,4 +132,4 @@ async function addToWeatherList(latitude, longitude, user_id){
 
 
 
-export { signUp, logIn, logOut, addToWeatherList }
+export { signUp, logIn, logOut, fetchUsersWeatherList, addToWeatherList }

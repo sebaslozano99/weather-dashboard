@@ -29,7 +29,7 @@ export default function Map() {
         { !geoLocationPosition && 
           <button 
             onClick={() => getGeoLocation(setCity)}
-            className="absolute bottom-2 left-2 z-50 flex justify-center gap-2 px-2 py-1.5 text-white min-w-16 bg-[#21295C] rounded-2xl" 
+            className="absolute bottom-2 left-2 z-20 flex justify-center gap-2 px-2 py-1.5 text-white min-w-16 bg-[#21295C]/50 hover:bg-[#21295C]/80 transition-all duration-300 ease-in-out rounded-2xl" 
           >
            { isLoading ? "Loading..." : <FaLocationCrosshairs size={22} /> }
           </button>

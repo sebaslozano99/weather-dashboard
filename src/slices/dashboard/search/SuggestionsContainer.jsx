@@ -8,7 +8,7 @@ export default function SuggestionsContainer({locations, isPending}) {
 
 
   if(isPending) return (
-    <div className="absolute flex justify-center items-center p-2 w-full mt-1 bg-white rounded-lg" >
+    <div className="absolute z-50 flex justify-center items-center p-2 w-full mt-1 bg-white rounded-lg" >
       <Spinner />
     </div>
   )
