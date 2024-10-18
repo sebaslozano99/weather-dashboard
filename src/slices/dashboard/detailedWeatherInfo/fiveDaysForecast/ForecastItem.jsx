@@ -10,7 +10,7 @@ export default function ForecastItem({info}) {
 
   return (
     <div className="flex flex-col items-center justify-around flex-shrink-0 p-3 md:p-2 w-full min-[550px]:w-6/12 md:w-auto bg-[#9EB3C2] rounded-xl" >
-      <p className="font-bold text-4xl md:text-xl" >{ info.main.temp }°C</p>
+      <p className="font-bold text-4xl md:text-xl" >{ (info.main.temp).toFixed(1) }°C</p>
 
       <div className="flex flex-col items-center gap-2 w-full" > 
         <WeatherImage data={info} className="w-24 md:w-5/12" />

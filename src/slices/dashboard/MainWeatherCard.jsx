@@ -48,7 +48,7 @@ export default function MainWeatherCard() {
 
             <WeatherImage data={data} className="w-1/4 md:w-2/6" />
 
-            <p className="font-normal text-center text-3xl md:text-6xl" >{main.temp}°C</p>
+            <p className="font-normal text-center text-3xl md:text-6xl" >{(main.temp).toFixed(1)}°C</p>
 
         </div>
 

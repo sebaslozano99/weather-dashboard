@@ -11,7 +11,7 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div className="bg-white px-2 py-4 rounded-md">
         <p>Date: {date}</p>
-        <p className="label">{`Temperature: ${payload[0].value}°C`}</p>
+        <p className="label">{`Temperature: ${(payload[0].value).toFixed(1)}°C`}</p>
       </div>
     );
   }

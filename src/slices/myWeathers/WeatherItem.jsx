@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaLocationDot } from "react-icons/fa6";
 import useGetPositionsTime from "../useGetPositionsTime";
 import PropTypes from "prop-types";
 import Spinner from "../../ui/Spinner";
 import WeatherImage from "../../ui/WeatherImage";
 import useGetWeatherInfoOfPosition from "../useGetWeatherInfoOfPosition";
 import DeleteWeatherBtn from "./DeleteWeatherBtn";
+import { FaHotTubPerson } from "react-icons/fa6";
+import WeatherDetail from "./WeatherDetail";
+
 
 
 const options = {
@@ -16,13 +18,44 @@ const options = {
     day: 'numeric',
   };
   
+  function formatTimestampToReadableTime(unix_timestamp){
+    // Create a new JavaScript Date object based on the timestamp
+    // multiplied by 1000 so that the argument is in milliseconds, not seconds
+    const date = new Date(unix_timestamp * 1000);
+
+    // const hour = date.getUTCHours().toString().padStart(2,0);
+    const hour = date.getUTCHours();
+    const minutes = date.getUTCMinutes().toString().padStart(2,0);
+    // Hours part from the timestamp
+    // const hours = date.getHours();
+
+    // Minutes part from the timestamp
+    // const minutes = "0" + date.getMinutes();
+
+    // Seconds part from the timestamp
+    // const seconds = "0" + date.getSeconds();
+
+    // Will display time in 10:30:23 format
+    // const formattedTime = hours + ':' + minutes.substring(-2) + ':' + seconds.substring(-2);
+
+    const formattedTime = `${hour}:${minutes}`;
+
+    console.log(hour);
+
+    // return formattedTime ;
+  }
+
+
+
 
 export default function WeatherItem({position, id}) {
 
   const [dateOfCity, setDateOfCity] = useState(null);
   const { data: timeData, isPending: isPendingTime } = useGetPositionsTime(position.lat, position.lon, position); //fetch time of specific position
   const { data, isPending } = useGetWeatherInfoOfPosition(position); //fetch current weather data of specific position
+
   const formattedDate = new Date(dateOfCity).toLocaleDateString("en-US", options);
+
 
 
   useEffect(() => {
@@ -36,58 +69,75 @@ export default function WeatherItem({position, id}) {
     <Spinner size={10} />
   </div>
 
+
+formatTimestampToReadableTime(data?.sys?.sunrise);
+
+
   return (
-    <div className="relative flex justify-between p-8 bg-white/20 shadow-2xl rounded-md" >
+    <div className="relative flex gap-2 p-6 h-[380px] bg-white/20 shadow-2xl rounded-md" >
 
        <DeleteWeatherBtn id={id} /> 
 
-        <div className="flex flex-col justify-between md:w-[50%] lg:w-[40%] h-full" >
+       <div className=" flex flex-col gap-4 pr-4 mr-2  w-6/12 border-r-[1px] border-black/20" >
 
-            <div className="flex gap-2" >
+            <div className="flex flex-col gap-1" >
 
-                <span 
-                    className="flex items-center  gap-3 text-white text-xs py-1.5 px-2 max-w-max bg-[#21295C] rounded-2xl"
+                <Link to={`/dashboard/${position.lat} ${position.lon}`} 
+                    className="font-bold text-4xl"
                 > 
-                    <FaLocationDot color="#ffffff" /> {data?.name} - {data?.sys?.country}
-                </span>
-
-                <Link 
-                    className="flex items-center  gap-3 text-white text-xs py-1.5 px-2 max-w-max bg-[#21295C] rounded-2xl" 
-                    to={`/dashboard/${position.lat} ${position.lon}`} >
-                    Details
+                    {data?.name}, {data?.sys?.country}
                 </Link>
 
+                <p className="font-light text-xl">{ isPendingTime ? "Loading..." :  formattedDate}</p>
+                
             </div>
 
 
-            <div>
-                {
-                    isPendingTime ? 
+            <div className="flex justify-between" >
 
-                    <Spinner size={1} /> :
+                <div className="p-2 w-6/12" >
+                    <WeatherImage data={data} className="w-11/12"  />   
+                </div>
+                
+                <div className="flex flex-col justify-center items-center gap-2 w-6/12" >
+                    <p className="text-7xl" >{(data.main.temp).toFixed(1)}°C</p>
+                    <p className="text-2xl font-medium text-center" >{data?.weather[0]?.description}</p>
+                </div>
 
-                    <>
-                        <span className="font-bold text-4xl" >{formattedDate.slice(0, formattedDate.indexOf(",") )}</span><br/>
-                        <p className="text-sm">{formattedDate.slice(formattedDate.indexOf(" "))}</p>
-                    </>
-                }
             </div>
+       </div>
 
 
-            <div className="flex flex-col gap-2" >
-                <p className="font-bold text-5xl" >{data?.main?.temp}°C</p>
-                <p className="text-sm" ><b>max:</b> {data?.main?.temp_max}°C - <b>min:</b> {data?.main?.temp_min}°C</p>
-            </div>
+       {/* border-2 border-red-800 */}
 
-        </div>
+        <div className="grid grid-cols-3 gap-3 p-2 w-6/12 h-full" >
 
-        <div className="flex  flex-col items-center justify-between w-[45%] h-full" >
-            <WeatherImage data={data} className="w-10/12 "  />
 
-            <div>
-                <p className="font-semibold text-2xl" >{data.weather[0].main}</p>
-                <p><b>Feels like:</b> {data?.main?.feels_like}°C</p>
-            </div>
+            <WeatherDetail label="Max Temp" data={`${(data.main.temp_max).toFixed(1)}°C`} >
+                <FaHotTubPerson />    
+            </WeatherDetail>
+
+            <WeatherDetail label="Min Temp" data={`${(data.main.temp_min).toFixed(1)}°C`} >
+                <FaHotTubPerson />    
+            </WeatherDetail>
+
+            <WeatherDetail label="Feels Like" data={`${(data.main.temp).toFixed(1)}°C`} >
+                <FaHotTubPerson />    
+            </WeatherDetail>
+
+            <WeatherDetail label="Wind Speen" data={`${data.wind.speed} m/s`} >
+                <FaHotTubPerson />    
+            </WeatherDetail>
+
+            <WeatherDetail label="Sunrise" data={`${new Date(data.sys.sunrise).toLocaleTimeString()}`} >
+                <FaHotTubPerson />    
+            </WeatherDetail>
+
+            <WeatherDetail label="Sunset" data={`${new Date(data.sys.sunset).toLocaleTimeString()}`} >
+                <FaHotTubPerson />    
+            </WeatherDetail>
+
+
         </div>
 
     </div>
@@ -101,3 +151,7 @@ WeatherItem.propTypes = {
     position: PropTypes.object,
     id: PropTypes.number,
 }
+
+
+
+// border-4 border-purple-800
