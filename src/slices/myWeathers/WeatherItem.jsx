@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useGetWeatherInfoOfPosition from "../useGetWeatherInfoOfPosition";
 import useGetPositionsTime from "../useGetPositionsTime";
 import PropTypes from "prop-types";
 import Spinner from "../../ui/Spinner";
 import WeatherImage from "../../ui/WeatherImage";
-import useGetWeatherInfoOfPosition from "../useGetWeatherInfoOfPosition";
 import DeleteWeatherBtn from "./DeleteWeatherBtn";
 import { FaHotTubPerson } from "react-icons/fa6";
 import WeatherDetail from "./WeatherDetail";
@@ -17,35 +17,6 @@ const options = {
     month: 'long',
     day: 'numeric',
   };
-  
-  function formatTimestampToReadableTime(unix_timestamp){
-    // Create a new JavaScript Date object based on the timestamp
-    // multiplied by 1000 so that the argument is in milliseconds, not seconds
-    const date = new Date(unix_timestamp * 1000);
-
-    // const hour = date.getUTCHours().toString().padStart(2,0);
-    const hour = date.getUTCHours();
-    const minutes = date.getUTCMinutes().toString().padStart(2,0);
-    // Hours part from the timestamp
-    // const hours = date.getHours();
-
-    // Minutes part from the timestamp
-    // const minutes = "0" + date.getMinutes();
-
-    // Seconds part from the timestamp
-    // const seconds = "0" + date.getSeconds();
-
-    // Will display time in 10:30:23 format
-    // const formattedTime = hours + ':' + minutes.substring(-2) + ':' + seconds.substring(-2);
-
-    const formattedTime = `${hour}:${minutes}`;
-
-    console.log(hour);
-
-    // return formattedTime ;
-  }
-
-
 
 
 export default function WeatherItem({position, id}) {
@@ -70,7 +41,6 @@ export default function WeatherItem({position, id}) {
   </div>
 
 
-formatTimestampToReadableTime(data?.sys?.sunrise);
 
 
   return (
@@ -129,11 +99,11 @@ formatTimestampToReadableTime(data?.sys?.sunrise);
                 <FaHotTubPerson />    
             </WeatherDetail>
 
-            <WeatherDetail label="Sunrise" data={`${new Date(data.sys.sunrise).toLocaleTimeString()}`} >
+            <WeatherDetail label="Sunrise" data={`${new Date(data.sys.sunrise * 1000).toLocaleTimeString("en-US" ,{timeZone: timeData?.timeZone})}`} >
                 <FaHotTubPerson />    
             </WeatherDetail>
 
-            <WeatherDetail label="Sunset" data={`${new Date(data.sys.sunset).toLocaleTimeString()}`} >
+            <WeatherDetail label="Sunset" data={`${new Date(data.sys.sunset * 1000).toLocaleTimeString("en-US" ,{timeZone: timeData?.timeZone})}`} >
                 <FaHotTubPerson />    
             </WeatherDetail>
 
