@@ -32,3 +32,13 @@ Levering the Open Weather api and the Leaflet library I'll build a high interact
 3. User Preferences
     o Let users choose units (Celsius/Fahrenheit)
     o Implement a toggle for dark/light themes for better user experience
+
+
+
+## WEB APIs CONSUMED
+
+1. Current Weather Api from OPEN WEATHER API
+2. 3-hours forecast 5 days from OPEN WEATHER API
+3. Geocoding api from OPEN WEATHER API
+4. TimeApi
+   
