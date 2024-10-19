@@ -36,19 +36,21 @@ export default function MainWeatherCard() {
 
 
   return (
-    <div className="relative flex flex-col gap-4 md:gap-2 py-4 px-2 md:py-10 md:px-4 w-full h-full md:h-full shadow-xl bg-white/20 rounded-2xl" >
+    <div className="relative flex flex-col gap-4 md:gap-2 py-4 px-2 md:py-10 md:px-4 w-full h-[90%] shadow-xl bg-white/20 rounded-2xl" >
 
         <AddWeatherBtn city={city} city_name={name} country_code={sys.country} />
 
         <div className="flex flex-col items-center justify-around h-[80%]" >
 
-            <h2 className="font-light text-2xl md:text-4xl text-center tracking-wider" >
-                <Link to={`${city.lat} ${city.lon}`} >{name}-{sys.country}</Link>
+            <h2 className="font-bold text-2xl md:text-4xl text-center tracking-wider" >
+                <Link to={`${city.lat} ${city.lon}`} >{name},{sys.country}</Link>
             </h2> 
 
-            <WeatherImage data={data} className="w-1/4 md:w-2/6" />
+            <div className="flex flex-col items-center justify-around w-auto" >
+                <WeatherImage data={data} className="w-1/4 md:w-5/12" />
+                <p className="font-normal text-center text-3xl md:text-6xl" >{(main.temp).toFixed(1)}°C</p>
+            </div>
 
-            <p className="font-normal text-center text-3xl md:text-6xl" >{(main.temp).toFixed(1)}°C</p>
 
         </div>
 

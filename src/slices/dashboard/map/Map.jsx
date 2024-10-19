@@ -6,8 +6,7 @@ import PropTypes from "prop-types";
 import useGeolocation from "../../../hooks/useGeolocation";
 import toast from "react-hot-toast";
 import Spinner from "../../../ui/Spinner";
-import { useQuery } from "@tanstack/react-query";
-import { getWeatherData } from "../../../services/openWeather";
+import useGetWeatherInfoOfPosition from "../../useGetWeatherInfoOfPosition";
 
 
 
@@ -18,12 +17,14 @@ export default function Map() {
 
   const { city, setCity } = useCoordinates();
   const { getGeoLocation, position: geoLocationPosition, isLoading, error } = useGeolocation();
-  const { data } = useQuery({
-    queryKey: ["mainWeather"],
-    queryFn: ({signal}) => getWeatherData(city, signal),
-    retry: 2,
-    refetchOnWindowFocus: false,
-  })
+  const { data } = useGetWeatherInfoOfPosition(city);
+
+  // const { data } = useQuery({
+  //   queryKey: ["mainWeather"],
+  //   queryFn: ({signal}) => getWeatherData(city, signal),
+  //   retry: 2,
+  //   refetchOnWindowFocus: false,
+  // })
 
 
   useEffect(() => {
@@ -32,38 +33,38 @@ export default function Map() {
 
 
   return (
-      <div className={`relative w-full md:w-6/12 h-1/2 md:h-full`} >
+    <div className={`relative w-full md:w-6/12 h-1/2 md:h-full`} >
 
-        { !geoLocationPosition && 
+      { !geoLocationPosition && 
 
-          <button 
-            onClick={() => getGeoLocation(setCity)}
-            className="absolute bottom-2 left-2 z-20 flex justify-center gap-2 px-2 py-1.5 text-white min-w-16 bg-[#21295C]/50 hover:bg-[#21295C]/80 transition-all duration-300 ease-in-out rounded-2xl" 
-          >
-           { isLoading ? <Spinner size={1} type="secondary" /> : <FaLocationCrosshairs size={22} /> }
-          </button>
+        <button 
+          onClick={() => getGeoLocation(setCity)}
+          className="absolute bottom-2 left-2 z-20 flex justify-center gap-2 px-2 py-1.5 text-white min-w-16 bg-[#21295C]/50 hover:bg-[#21295C]/80 transition-all duration-300 ease-in-out rounded-2xl" 
+        >
+          { isLoading ? <Spinner size={1} type="secondary" /> : <FaLocationCrosshairs size={22} /> }
+        </button>
 
-        }
+      }
 
-        
+      
 
-        <MapContainer center={[city.lat, city.lon]} zoom={6} scrollWheelZoom={true} className="z-10 h-full" >
+      <MapContainer center={[city.lat, city.lon]} zoom={6} scrollWheelZoom={true} className="z-10 h-full" >
 
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-          <Marker position={[city.lat, city.lon]}>
-            <Popup>
-              { data?.name }
-            </Popup>
-          </Marker>
+        <Marker position={[city.lat, city.lon]}>
+          <Popup>
+            { data?.name }
+          </Popup>
+        </Marker>
 
-          <ChangePosition position={[city.lat, city.lon]} />
-          <DetectClick />
+        <ChangePosition position={[city.lat, city.lon]} />
+        <DetectClick />
 
-        </MapContainer>
+      </MapContainer>
 
     </div>
   )
