@@ -19,7 +19,7 @@ export default function WeathersContainer() {
 
 
   return (
-    <div className={`flex flex-col gap-6 w-9/12 h-full mx-auto`} >
+    <div className={`flex flex-col gap-6 w-full h-full mx-auto`} >
 
       { !user && "Create an account and start saving yout important weather information!" }
       { !data || data.length === 0 && "Start adding weather information of cities!" }
