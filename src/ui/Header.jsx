@@ -1,16 +1,30 @@
+import { useState } from "react";
+import BurgerMenu from "./BurgerMenu";
 import Logo from "./Logo";
 import NavBar from "./NavBar";
-import { FiMoon } from "react-icons/fi";
+import NavBarMobile from "./NavBarMobile";
+
+
+
+
+
 
 
 export default function Header() {
+
+  const [showMenu, setShowMenu] = useState(false);
+
+  function handleShowMenu(){
+    setShowMenu((prev) => !prev);
+  }
+
   return (
-    <header className={`flex items-center justify-around w-full h-[10vh] bg-[#21295C] shadow-2xl`} >
+    <header className={`sticky top-0 z-50 flex items-center justify-between min-[580px]:justify-around px-6 min-[580px]:p-0 w-full h-[10vh] bg-[#21295C] shadow-2xl`} >
       <Logo />
       <NavBar />
-      <button >
-        <FiMoon color="#fff" size={20} />
-      </button>
+      <NavBarMobile showMenu={showMenu} setShowMenu={handleShowMenu} />
+      <BurgerMenu showMenu={showMenu} setShowMenu={setShowMenu} />
+      
     </header>
   )
 }
