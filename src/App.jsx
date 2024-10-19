@@ -17,6 +17,7 @@ import Applayout from "./ui/Applayout";
 import DetailedWeatherInfo from "./slices/dashboard/detailedWeatherInfo/DetailedWeatherInfo";
 import LazySpinner from "./ui/LazySpinner";
 import { Toaster } from "react-hot-toast";
+import { TempScaleProvider } from "./contexts/TempScaleContext";
 
 
 
@@ -38,24 +39,26 @@ export default function App() {
       <AuthProvider>
         <SearchProvider>
           <CoordinatesProvider>
+            <TempScaleProvider>
 
-            <BrowserRouter>
-              <Suspense fallback={ <LazySpinner /> } >
-                <Routes>
-                  <Route element={ <Applayout /> } >
-                    <Route index element={ <Navigate replace to="homepage"  /> } />
-                    <Route path="/homepage" element={ <Homepage /> }  />
-                    <Route path="/account" element={ <Account /> } />
-                    <Route path="/signup" element={ <CreateAccount /> } />
-                    <Route path="/dashboard" element={ <Dashboard /> } />
-                    <Route path="/dashboard/:moreInfo" element={ <DetailedWeatherInfo /> } />
-                    <Route path="/myWeather" element={ <MyWeather /> } />
-                    <Route path="*" element={ <NotFound /> } />
-                  </Route>
-                </Routes> 
-              </Suspense>
-            </BrowserRouter>
+              <BrowserRouter>
+                <Suspense fallback={ <LazySpinner /> } >
+                  <Routes>
+                    <Route element={ <Applayout /> } >
+                      <Route index element={ <Navigate replace to="homepage"  /> } />
+                      <Route path="/homepage" element={ <Homepage /> }  />
+                      <Route path="/account" element={ <Account /> } />
+                      <Route path="/signup" element={ <CreateAccount /> } />
+                      <Route path="/dashboard" element={ <Dashboard /> } />
+                      <Route path="/dashboard/:moreInfo" element={ <DetailedWeatherInfo /> } />
+                      <Route path="/myWeather" element={ <MyWeather /> } />
+                      <Route path="*" element={ <NotFound /> } />
+                    </Route>
+                  </Routes> 
+                </Suspense>
+              </BrowserRouter>
 
+            </TempScaleProvider>
           </CoordinatesProvider>
         </SearchProvider> 
       </AuthProvider>

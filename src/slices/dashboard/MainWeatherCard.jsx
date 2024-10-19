@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { useTempScaleContext } from "../../contexts/TempScaleContext";
 import { useCoordinates } from "../../contexts/CoordinatesContext";
 import useGetWeatherInfoOfPosition from "../useGetWeatherInfoOfPosition";
 import capitalize from "../../utilities/Capitalize";
@@ -12,10 +13,12 @@ import AddWeatherBtn from "./AddWeatherBtn";
 
 export default function MainWeatherCard() {
 
+    const { isCelcius } = useTempScaleContext();
     const { city } = useCoordinates();
     const [, setSearchParams] = useSearchParams();
     const { data, isPending, error, isError } = useGetWeatherInfoOfPosition(city)
     const { name, sys, main } = data ?? {};
+    const temperature = isCelcius ? (main.temp).toFixed(0) : ((main.temp * 9/5) + 32).toFixed(0);
     
     useEffect(() => {
         setSearchParams(city);
@@ -48,7 +51,7 @@ export default function MainWeatherCard() {
 
             <div className="flex flex-col items-center justify-around w-auto" >
                 <WeatherImage data={data} className="w-1/4 md:w-5/12" />
-                <p className="font-normal text-center text-3xl md:text-6xl" >{(main.temp).toFixed(1)}°C</p>
+                <p className="font-normal text-center text-3xl md:text-6xl" >{temperature}°{isCelcius ? "C" : "F"}</p>
             </div>
 
 

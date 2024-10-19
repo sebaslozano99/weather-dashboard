@@ -5,13 +5,14 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import ManageInfo from "./ManageInfo";
 import DeleteAccount from "./DeleteAccount";
 import Spinner from "../../ui/Spinner";
+import UserPreferences from "./UserPreferences";
 
 
 
 
 export default function MyAccount() {
 
-  const [showDeleteAccount, setShowDeleteAccount] = useState(false);
+  const [showDeleteAccount, setShowDeleteAccount] = useState("info");
   const { user } = useAuthContext();
   const { mutate: handleLogOut, isPending, isError, error } = useMutation({
     mutationFn: logOut,    
@@ -41,7 +42,7 @@ export default function MyAccount() {
 
         <div className="flex flex-col md:flex-row gap-6 pt-8 w-full h-[92%]" >
 
-            <div className="flex flex-col gap-4 p-2 w-full md:w-[30%] h-full" >
+            <div className="flex flex-col gap-6 p-2 w-full md:w-[30%] h-full" >
                 
                 <div className="flex md:flex-col justify-between gap-4" >
                     <img src="../../../public/user.png" alt="users_img" className="w-3/12 min-[500px]:w-28 md:w-6/12" />
@@ -55,15 +56,20 @@ export default function MyAccount() {
 
                 <nav className="w-full" >
                     <ul >
-                        <li onClick={() => setShowDeleteAccount(current => !current)} className={`${!showDeleteAccount && "font-bold text-[#21295C]" } cursor-pointer`} >Personal information</li>
+                        <li onClick={() => setShowDeleteAccount("info")} className={`${showDeleteAccount === "info" && "font-bold text-[#21295C]" } cursor-pointer`} >Personal information</li>
 
-                        <li onClick={() => setShowDeleteAccount(current => !current)} className={`${showDeleteAccount && "font-bold text-[#21295C]"} cursor-pointer`} >Delete account</li>
+                        <li onClick={() => setShowDeleteAccount("preferences")} className={`${showDeleteAccount === "preferences" && "font-bold text-[#21295C]"} cursor-pointer`} >My Preferences</li>
+
+                        <li onClick={() => setShowDeleteAccount("delete")} className={`${showDeleteAccount === "delete" && "font-bold text-[#21295C]"} cursor-pointer`} >Delete account</li>
+
                     </ul>
                 </nav>
 
             </div>
 
-            {!showDeleteAccount ? <ManageInfo user={user} /> : <DeleteAccount /> }
+            {showDeleteAccount === "info" && <ManageInfo user={user} /> }
+            {showDeleteAccount === "delete" && <DeleteAccount /> }
+            {showDeleteAccount === "preferences" && <UserPreferences /> }
 
         </div>
 
