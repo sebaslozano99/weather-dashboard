@@ -1,17 +1,22 @@
 import { CartesianGrid, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
 import PropTypes from "prop-types";
+import { useTempScaleContext } from "../../../../contexts/TempScaleContext";
 
 
 
 const CustomTooltip = ({ active, payload }) => {
+
+  const { isCelcius } = useTempScaleContext();
   if (active && payload && payload.length) {
 
+
+    const temperature = isCelcius ? payload[0].value :  (payload[0].value * 9/5) + 32;
     const date = new Date(payload[0].payload.dt_txt).toLocaleDateString();
 
     return (
       <div className="bg-white px-2 py-4 rounded-md">
         <p>Date: {date}</p>
-        <p className="label">{`Temperature: ${(payload[0].value).toFixed(1)}°C`}</p>
+        <p className="label">{`Temperature: ${temperature.toFixed(0)}°${isCelcius ? "C" : "F"}`}</p>
       </div>
     );
   }

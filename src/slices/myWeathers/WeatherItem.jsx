@@ -26,7 +26,7 @@ export default function WeatherItem({position, id}) {
   const { data: timeData, isPending: isPendingTime } = useGetPositionsTime(position.lat, position.lon, position); //fetch time of specific position
   const { data, isPending } = useGetWeatherInfoOfPosition(position); //fetch current weather data of specific position
   const formattedDate = new Date(dateOfCity).toLocaleDateString("en-US", options);
-  const temperature = isCelcius ? (data.main.temp).toFixed(0) : ((data.main.temp * 9/5) + 32).toFixed(0);
+  const temperature = isCelcius ? data?.main.temp : (data?.main.temp * 9/5) + 32;
 
 
 
@@ -71,7 +71,7 @@ export default function WeatherItem({position, id}) {
           </div>
           
           <div className="flex flex-col justify-center gap-2 min-[960px]:w-6/12" >
-              <p className="text-3xl min-[550px]:text-5xl min-[550px]:text-7xl text-center" >{temperature}°{isCelcius ? "C" : "F"}</p>
+              <p className="text-3xl min-[550px]:text-7xl text-center" >{temperature.toFixed(0)}°{isCelcius ? "C" : "F"}</p>
               <p className="text-lg min-[550px]:text-2xl font-medium text-center" >{data?.weather[0]?.description}</p>
           </div>
 

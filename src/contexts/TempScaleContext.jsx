@@ -9,7 +9,7 @@ const TempScaleContext = createContext();
 
 function TempScaleProvider({children}) {
 
-  const [isCelcius, setIsCelcius] = useState(false);
+  const [isCelcius, setIsCelcius] = useState(true);
 
 
   function handleChangeTempScale(){
