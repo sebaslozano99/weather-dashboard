@@ -23,8 +23,8 @@ export default function MyAccount() {
   return (
     <div className="w-full md:w-10/12 h-full" >
 
-        <div className="flex justify-between items-center p-2 h-[8%] border-b-[1px] border-black/20" >
-            <h2>Welcome back, <b>{user.user_metadata.username}</b></h2>
+        <div className="flex justify-between items-center p-2 h-[8%] border-b-[1px] border-black/20 dark:border-white/20" >
+            <h2 className="dark:text-white" >Welcome back, <b>{user.user_metadata.username}</b></h2>
 
             <button
                 className="flex justify-center px-5 py-2 text-sm text-white min-w-20 bg-[#21295C]  border-none rounded-3xl outline-none"
@@ -37,7 +37,7 @@ export default function MyAccount() {
         </div>
 
 
-        { isError && <p className="text-xs text-red-500" >{error.message || error.description}</p> }
+        { isError && <p className="text-xs text-red-500 dark:text-white" >{error.message || error.description}</p> }
 
 
         <div className="flex flex-col md:flex-row gap-6 pt-8 w-full h-[92%]" >
@@ -48,19 +48,19 @@ export default function MyAccount() {
                     <img src="../../../public/user.png" alt="users_img" className="w-3/12 min-[500px]:w-28 md:w-6/12" />
 
                     <div >
-                        <h2 className="font-semibold min-[500px]:text-2xl md:text-lg" >{user.user_metadata.username}</h2>
-                        <p className="min-[500px]:text-lg md:text-sm" >{user.email}</p>
+                        <h2 className="font-semibold min-[500px]:text-2xl md:text-lg dark:text-cyan-500" >{user.user_metadata.username}</h2>
+                        <p className="min-[500px]:text-lg md:text-sm dark:text-white" >{user.email}</p>
                     </div>
                 </div>
 
 
                 <nav className="w-full" >
                     <ul >
-                        <li onClick={() => setShowDeleteAccount("info")} className={`${showDeleteAccount === "info" && "font-bold text-[#21295C]" } cursor-pointer`} >Personal information</li>
+                        <li onClick={() => setShowDeleteAccount("info")} className={`${showDeleteAccount === "info" && "font-bold text-[#21295C] dark:text-cyan-500" } cursor-pointer dark:text-white `} >Personal information</li>
 
-                        <li onClick={() => setShowDeleteAccount("preferences")} className={`${showDeleteAccount === "preferences" && "font-bold text-[#21295C]"} cursor-pointer`} >My Preferences</li>
+                        <li onClick={() => setShowDeleteAccount("preferences")} className={`${showDeleteAccount === "preferences" && "font-bold text-[#21295C] dark:text-cyan-500"} cursor-pointer dark:text-white `} >My Preferences</li>
 
-                        <li onClick={() => setShowDeleteAccount("delete")} className={`${showDeleteAccount === "delete" && "font-bold text-[#21295C]"} cursor-pointer`} >Delete account</li>
+                        <li onClick={() => setShowDeleteAccount("delete")} className={`${showDeleteAccount === "delete" && "font-bold text-[#21295C] dark:text-cyan-500"} cursor-pointer dark:text-white `} >Delete account</li>
 
                     </ul>
                 </nav>

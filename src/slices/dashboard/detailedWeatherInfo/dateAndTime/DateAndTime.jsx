@@ -53,17 +53,17 @@ export default function DateAndTime({data}) {
 
 
   return (
-    <div className="flex flex-col justify-center items-center gap-8 col-span-3 row-span-4 p-4 bg-white/20 shadow-2xl  rounded-lg" >
+    <div className="flex flex-col justify-center items-center gap-8 col-span-3 row-span-4 p-4 bg-white/20 dark:bg-[#252525]/60 shadow-2xl  rounded-lg" >
       {
         isPending ? <Spinner size={8} />  :
         <>
-          <h2 className="font-semibold text-center text-2xl md:text-xl lg:text-2xl" >{data.name}-{data.sys.country}</h2>
+          <h2 className="font-semibold text-center text-2xl md:text-xl lg:text-2xl dark:text-white" >{data.name}-{data.sys.country}</h2>
 
           <div className="flex flex-col items-center gap-1" >
 
-            <p className="font-bold text-5xl md:text-3xl lg:text-4xl">{currentPositionsTime?.toLocaleTimeString()}</p>
+            <p className="font-bold text-5xl md:text-3xl lg:text-4xl dark:text-white">{currentPositionsTime?.toLocaleTimeString()}</p>
 
-            <p className="font-normal" >{currentPositionsDate}</p>  
+            <p className="font-normal dark:text-white" >{currentPositionsDate}</p>  
 
           </div>
         </>

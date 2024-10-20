@@ -18,6 +18,7 @@ import DetailedWeatherInfo from "./slices/dashboard/detailedWeatherInfo/Detailed
 import LazySpinner from "./ui/LazySpinner";
 import { Toaster } from "react-hot-toast";
 import { TempScaleProvider } from "./contexts/TempScaleContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 
 
@@ -40,24 +41,24 @@ export default function App() {
         <SearchProvider>
           <CoordinatesProvider>
             <TempScaleProvider>
-
-              <BrowserRouter>
-                <Suspense fallback={ <LazySpinner /> } >
-                  <Routes>
-                    <Route element={ <Applayout /> } >
-                      <Route index element={ <Navigate replace to="homepage"  /> } />
-                      <Route path="/homepage" element={ <Homepage /> }  />
-                      <Route path="/account" element={ <Account /> } />
-                      <Route path="/signup" element={ <CreateAccount /> } />
-                      <Route path="/dashboard" element={ <Dashboard /> } />
-                      <Route path="/dashboard/:moreInfo" element={ <DetailedWeatherInfo /> } />
-                      <Route path="/myWeather" element={ <MyWeather /> } />
-                      <Route path="*" element={ <NotFound /> } />
-                    </Route>
-                  </Routes> 
-                </Suspense>
-              </BrowserRouter>
-
+              <ThemeProvider>
+                <BrowserRouter>
+                  <Suspense fallback={ <LazySpinner /> } >
+                    <Routes>
+                      <Route element={ <Applayout /> } >
+                        <Route index element={ <Navigate replace to="homepage"  /> } />
+                        <Route path="/homepage" element={ <Homepage /> }  />
+                        <Route path="/account" element={ <Account /> } />
+                        <Route path="/signup" element={ <CreateAccount /> } />
+                        <Route path="/dashboard" element={ <Dashboard /> } />
+                        <Route path="/dashboard/:moreInfo" element={ <DetailedWeatherInfo /> } />
+                        <Route path="/myWeather" element={ <MyWeather /> } />
+                        <Route path="*" element={ <NotFound /> } />
+                      </Route>
+                    </Routes> 
+                  </Suspense>
+                </BrowserRouter>
+              </ThemeProvider>
             </TempScaleProvider>
           </CoordinatesProvider>
         </SearchProvider> 

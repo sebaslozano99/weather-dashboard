@@ -19,10 +19,10 @@ export default function SuggestionItem({location}) {
 
   return (
     <div 
-        className="py-2 px-3 bg-white border-b-2 cursor-pointer rounded-lg" 
-        onClick={() => setNewPosition(location)} 
+      className="py-2 px-3 bg-white hover:bg-[#eee] dark:bg-[#252525]/60 dark:hover:bg-[#343434] border-b-[1px] dark:border-b-[#3a3a3a] cursor-pointer rounded-lg" 
+      onClick={() => setNewPosition(location)} 
     >
-        <p>{`${location?.name} - ${location?.country}`}</p>
+        <p className="dark:text-white" >{`${location?.name} - ${location?.country}`}</p>
     </div>
   )
 }

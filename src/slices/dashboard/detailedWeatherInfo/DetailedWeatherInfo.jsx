@@ -46,12 +46,12 @@ export default function DetailedWeatherInfo() {
 
       <DateAndTime data={data} />
 
-      <div className="flex flex-col gap-5 sm:gap-1 sm:grid sm:grid-cols-3 sm:col-span-7 sm:row-span-4 p-4 bg-white/20 shadow-2xl rounded-lg" >
+      <div className="flex flex-col gap-5 sm:gap-1 sm:grid sm:grid-cols-3 sm:col-span-7 sm:row-span-4 p-4 bg-white/20 dark:bg-[#252525]/60 shadow-2xl rounded-lg" >
         <TempDetails data={data} />
 
         <div className="flex flex-col justify-center items-center" >
           <WeatherImage data={data} className="w-6/12 sm:w-8/12"  />
-          <p className="font-semibold text-xl min-[924px]:text-2xl text-center" >{capitalize(data?.weather[0]?.description)}</p>
+          <p className="font-semibold text-xl min-[924px]:text-2xl text-center dark:text-white" >{capitalize(data?.weather[0]?.description)}</p>
         </div>
 
         <MoreWeatherInfo data={data} />

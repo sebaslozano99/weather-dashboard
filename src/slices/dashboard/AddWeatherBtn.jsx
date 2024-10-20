@@ -44,7 +44,7 @@ export default function AddWeatherBtn({city, city_name, country_code}) {
 
   return (
     <button 
-      className="absolute z-10 top-2 right-2 flex justify-center items-center gap-2 px-2 py-1.5 text-white w-8 h-8 bg-[#21295C]/30 hover:bg-[#21295C]/60 transition-all duration-300 ease-in-out rounded-full" 
+      className="absolute z-10 top-2 right-2 flex justify-center items-center gap-2 px-2 py-1.5 text-white w-8 h-8 bg-[#21295C]/30 dark:bg-white/20 hover:bg-[#21295C]/60 dark:hover:bg-white/40  transition-all duration-300 ease-in-out rounded-full" 
       onClick={ user ? () => addWeather(city_name, country_code, city.lat, city.lon, user.id) : () => navigate("/account")}
     >
       { isAddingWeather ? <Spinner size={1} type="secondary" /> : "+" }

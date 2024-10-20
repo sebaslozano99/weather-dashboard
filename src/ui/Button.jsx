@@ -15,10 +15,14 @@ export default function Button({children, setterFunc}) {
 
   return (
     <button 
-        className={`flex ${isRight ? "justify-end" : "justify-start"} px-1.5 py-1 text-white  w-16 bg-[#21295C] transition-all duration-300 ease-in-out rounded-2xl`}
-        onClick={handleClick} 
+      className={`px-1.5 py-1 w-16 bg-[#21295C] transition-all duration-300 ease-in-out rounded-2xl`}
+      onClick={handleClick} 
     >
-        <div className={`text-black w-6 h-6 bg-white  rounded-full`} >{children}</div>
+      <div 
+        className={`flex justify-center items-center text-black w-6 h-6 bg-[#fff] rounded-full transition-all duration-300 ease-in-out ${isRight ? "translate-x-[120%]" : "translate-x-0"}`} 
+      >
+        {children}
+      </div>
     </button>
   )
 }
@@ -26,6 +30,6 @@ export default function Button({children, setterFunc}) {
 
 
 Button.propTypes = {
-    children: PropTypes.string,
+    children: PropTypes.any,
     setterFunc: PropTypes.func,
 }

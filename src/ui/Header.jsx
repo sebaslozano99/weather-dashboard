@@ -19,7 +19,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center justify-between min-[580px]:justify-around px-6 min-[580px]:p-0 w-full h-[10vh] bg-[#21295C] shadow-2xl`} >
+    <header className={`sticky top-0 z-50 flex items-center justify-between min-[580px]:justify-around px-6 min-[580px]:p-0 w-full h-[10vh] bg-[#21295C] dark:bg-[#0C070D] shadow-2xl`} >
       <Logo />
       <NavBar />
       <NavBarMobile showMenu={showMenu} setShowMenu={handleShowMenu} />

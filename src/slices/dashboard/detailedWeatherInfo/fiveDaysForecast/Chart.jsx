@@ -1,6 +1,7 @@
 import { CartesianGrid, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
-import PropTypes from "prop-types";
 import { useTempScaleContext } from "../../../../contexts/TempScaleContext";
+import { useThemeContext } from "../../../../contexts/ThemeContext";
+import PropTypes from "prop-types";
 
 
 
@@ -24,14 +25,17 @@ const CustomTooltip = ({ active, payload }) => {
 
 
 export default function Chart({data}) {
+
+  const { isDarkMode } = useThemeContext();
+
   return (
     <ResponsiveContainer width="100%" height="100%" >
-        <AreaChart width="100%" height="100%" data={data} >
-            <Area type="monotone" dataKey="main.temp"   />
-            <CartesianGrid stroke="#1C7293" strokeDasharray="5 5" />
-            <YAxis />
-            <Tooltip content={ <CustomTooltip /> } />
-        </AreaChart>
+      <AreaChart width="100%" height="100%" data={data} >
+        <Area type="monotone" dataKey="main.temp"   />
+        <CartesianGrid stroke={isDarkMode ? "#aaaaaa" : "#1C7293"} strokeDasharray="5 5" />
+        <YAxis />
+        <Tooltip content={ <CustomTooltip /> } />
+      </AreaChart>
     </ResponsiveContainer>
   )
 }
