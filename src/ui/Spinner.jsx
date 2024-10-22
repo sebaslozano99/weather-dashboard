@@ -7,7 +7,7 @@ export default function Spinner({size = 2, type = "primary"}) {
   const base = "border-t-2 border-r-2 rounded-full animate-spin";
 
   const styles = {
-    primary: base + ` border-t-[#21295C] border-r-[#21295C]`,
+    primary: base + ` border-t-[#21295C] dark:border-t-[#ffffff] border-r-[#21295C] dark:border-r-[#ffffff] `,
     secondary: base + ` border-t-[#ffffff] border-r-[#ffffff]`
   }
 
@@ -15,7 +15,7 @@ export default function Spinner({size = 2, type = "primary"}) {
     <div 
       className={styles[type]}
       style={size ? {width: `${size}rem`, height: `${size}rem`} : {width: "2rem", height: "2rem"}}
-     >
+    >
       
     </div>
   )

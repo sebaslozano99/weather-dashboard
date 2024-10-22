@@ -34,7 +34,7 @@ export default function MainWeatherCard() {
     )
 
 
-    if(isError) return <div className="flex justify-center items-center gap-1 w-full h-full shadow-xl bg-white/20 rounded-2xl" >{error.message}</div>
+    if(isError) return <div className="flex justify-center items-center gap-1 dark:text-white w-full h-full shadow-xl bg-white/20 rounded-2xl" >{error.message}</div>
 
 
 

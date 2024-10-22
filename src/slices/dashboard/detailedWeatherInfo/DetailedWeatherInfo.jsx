@@ -42,7 +42,7 @@ export default function DetailedWeatherInfo() {
   
 
   return (
-    <div className={`flex flex-col md:grid md:grid-cols-10 md:grid-rows-12 gap-4 p-4 w-full md:h-[160vh]`} >
+    <div className={`flex flex-col md:grid md:grid-cols-10 md:grid-rows-12 gap-4 p-2 md:p-6 w-full md:h-[160vh]`} >
 
       <DateAndTime data={data} />
 

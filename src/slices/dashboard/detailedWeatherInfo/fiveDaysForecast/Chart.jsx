@@ -30,7 +30,7 @@ export default function Chart({data}) {
 
   return (
     <ResponsiveContainer width="100%" height="100%" >
-      <AreaChart width="100%" height="100%" data={data} >
+      <AreaChart width="100%" height="100%" margin={{left: -30}} data={data} >
         <Area type="monotone" dataKey="main.temp"   />
         <CartesianGrid stroke={isDarkMode ? "#aaaaaa" : "#1C7293"} strokeDasharray="5 5" />
         <YAxis />

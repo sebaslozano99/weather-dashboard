@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import useGetPositionsTime from "../../../useGetPositionsTime";
 import PropTypes from "prop-types";
 import Spinner from "../../../../ui/Spinner";
-// import toast from "react-hot-toast";
 
 
 
