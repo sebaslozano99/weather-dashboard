@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useLocalstorage from "./useLocalstorage";
 
 
 
@@ -6,7 +7,7 @@ import { useState } from "react";
 
 export default function useGeolocation(){
 
-    const [position, setPosition] = useState(null);
+    const { value: position, setValue: setPosition } = useLocalstorage("usersPosition", null) 
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
