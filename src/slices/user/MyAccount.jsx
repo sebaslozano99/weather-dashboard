@@ -45,7 +45,7 @@ export default function MyAccount() {
             <div className="flex flex-col gap-6 p-2 w-full md:w-[30%] h-full" >
                 
                 <div className="flex md:flex-col justify-between gap-4" >
-                    <img src="../../../public/user.png" alt="users_img" className="w-3/12 min-[500px]:w-28 md:w-6/12" />
+                    <img src="/user.png" alt="users_img" className="w-3/12 min-[500px]:w-28 md:w-6/12" />
 
                     <div >
                         <h2 className="font-semibold min-[500px]:text-2xl md:text-lg dark:text-cyan-500" >{user.user_metadata.username}</h2>
