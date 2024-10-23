@@ -3,7 +3,7 @@ import { useThemeContext } from "../../contexts/ThemeContext";
 import { FiMoon } from "react-icons/fi";
 import { IoSunnyOutline } from "react-icons/io5";
 import ManageInfoCard from "./ManageInfoCard";
-import Button from "../../ui/Button";
+import Button from "../../ui/ToggleButton";
 
 
 export default function UserPreferences() {

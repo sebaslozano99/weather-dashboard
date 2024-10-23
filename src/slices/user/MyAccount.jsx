@@ -24,10 +24,10 @@ export default function MyAccount() {
     <div className="w-full md:w-10/12 h-full" >
 
         <div className="flex justify-between items-center p-2 h-[8%] border-b-[1px] border-black/20 dark:border-white/20" >
-            <h2 className="dark:text-white" >Welcome back, <b>{user.user_metadata.username}</b></h2>
+            <h2 className="dark:text-white text-sm min-[450px]:text-base" >Welcome back, <b>{user.user_metadata.username}</b></h2>
 
             <button
-                className="flex justify-center px-5 py-2 text-sm text-white min-w-20 bg-[#21295C]  border-none rounded-3xl outline-none"
+                className="flex justify-center px-5 py-2 text-xs text-white min-w-14 bg-[#21295C]  border-none rounded-3xl outline-none"
                 onClick={handleLogOut}
                 disabled={isPending}
             >
