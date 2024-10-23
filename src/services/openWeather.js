@@ -29,7 +29,7 @@ async function cityNameToPosition(cityName, signal){
     if(cityName.length < 3) return [];
 
     try {
-        const res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${API_KEY}`, { signal } );
+        const res = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${API_KEY}`, { signal } );
 
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
