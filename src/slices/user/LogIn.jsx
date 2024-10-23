@@ -41,7 +41,7 @@ export default function LogIn() {
         </div>
 
         <div className="flex flex-col relative" >
-          <label htmlFor="psw">Create Password</label>
+          <label htmlFor="psw">Password</label>
           <StyledInput state={password} setState={setPassword} type="password" placeholder="********" name="psw" disabled={isPending} />
         </div>
 
