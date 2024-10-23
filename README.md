@@ -5,7 +5,7 @@ Levering the Open Weather api and the Leaflet library I'll build a high interact
 
 ##CORE FEATURES
 
-1. Current Weather Display
+1. Current Weather
     o Show temperature, weather conditions (sunny, cloudy, etc.), humidity, wind 
     speed, and other relevant metrics.
    
@@ -14,12 +14,9 @@ Levering the Open Weather api and the Leaflet library I'll build a high interact
     o Allow users to search by using an interactive map.
     o Auto-detect user location for immediate weather info.
    
-3. 5-Day/7-Day Forecast
-    o Provide daily forecasts including high/low temperatures and weather 
-    conditions.
+3. 5-Days Forecast
+    o Provide a 5-days weather forecast
    
-4. Hourly Forecast
-    o Display hourly weather updates for the next 24 hours.
 
 ## USER FEATURES
 
@@ -27,7 +24,7 @@ Levering the Open Weather api and the Leaflet library I'll build a high interact
     o Enable user sign-up and login with Supabase authentication.
    
 2. Favorites List
-    o Allow users to save favorite locations for quick access.
+    o Allow users to save and delete favorite locations for quick access.
 
 3. User Preferences
     o Let users choose units (Celsius/Fahrenheit)
