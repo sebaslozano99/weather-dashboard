@@ -28,7 +28,6 @@ export default function SignUp() {
     mutate({email, password, username});
   }
 
-  // sm:h-5/6 md:h-auto w-11/12 md:w-6/12
 
   return (
     <form className={`flex flex-col gap-6 p-8 w-11/12 md:w-6/12 sm:h-5/6 md:h-auto bg-white/70 shadow-md rounded-xl`} onSubmit={onSubmit} >

@@ -20,6 +20,7 @@ export default function UserPreferences() {
         </div>
 
         <div className="grid md:grid-cols-2 grid-rows-3 gap-3  h-[80%]" >
+
             <ManageInfoCard label="Temp scale" data={`Current Scale: ${isCelcius ? "Celcius" : "Farenheit"}`} >
                 <Button setterFunc={handleChangeTempScale} >
                     { isCelcius ? "C" : "F" }
@@ -31,6 +32,7 @@ export default function UserPreferences() {
                     { !isDarkMode ? <IoSunnyOutline size={20} /> : <FiMoon size={20} />}
                 </Button>
             </ManageInfoCard>
+            
         </div>
 
     </div>

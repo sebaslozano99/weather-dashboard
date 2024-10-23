@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import PropTypes from "prop-types";
+import useLocalstorage from "../hooks/useLocalstorage";
 
 
 
@@ -14,22 +15,7 @@ const CoordinatesContext = createContext();
 
 function CoordinatesProvider({children}) {
 
-  const [city, setCityOne] = useState(() => {
-    const position = localStorage.getItem("position");
-    return JSON.parse(position) || {lat: 51.50, lon: 0.12};
-  });
-
-  // const [city, setCity] = useState({
-  //   lat: 51.50,
-  //   lon: 0.12,
-  // });
-
-
-  function setCity(newPositionObject){
-    setCityOne(newPositionObject);
-    localStorage.setItem("position", JSON.stringify(newPositionObject));
-  }
-
+  const { value: city, setValue: setCity } = useLocalstorage("position",  {lat: 51.50709058166208, lon: -0.1274924921257337});
 
   return (
     <CoordinatesContext.Provider value={{

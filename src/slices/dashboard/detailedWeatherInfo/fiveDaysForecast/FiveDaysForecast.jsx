@@ -22,8 +22,6 @@ export default function FiveDaysForecast({position}) {
 
 
 
-
-
   if(isPending) return <div className="flex justify-center items-center col-span-8 row-span-4 rounded-lg bg-white/20 dark:bg-[#252525]/60 shadow-2xl border-4 boder-red-800" >
     <Spinner size={7} />
   </div>
