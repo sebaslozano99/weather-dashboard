@@ -14,8 +14,12 @@ Levering the Open Weather api and the Leaflet library I'll build a high interact
     o Allow users to search by using an interactive map.
     o Auto-detect user location for immediate weather info.
    
-3. 5-Days Forecast
+3. Detailed section
     o Provide a 5-days weather forecast
+    o More current weather information about the the selected location
+    o Display the current time and date of the selected location
+   
+   
    
 
 ## USER FEATURES
