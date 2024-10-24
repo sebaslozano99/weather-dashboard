@@ -1,7 +1,7 @@
+import { useThemeContext } from "../../../contexts/ThemeContext";
 import PropTypes from "prop-types";
 import SuggestionItem from "./SuggestionItem";
 import Spinner from "../../../ui/Spinner";
-import { useThemeContext } from "../../../contexts/ThemeContext";
 
 
 export default function SuggestionsContainer({locations, isPending}) {

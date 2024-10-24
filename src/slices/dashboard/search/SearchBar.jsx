@@ -3,6 +3,7 @@ import { cityNameToPosition } from "../../../services/openWeather";
 import { useSearch } from "../../../contexts/SearchContext";
 import SuggestionsContainer from "./SuggestionsContainer";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 
 
@@ -18,6 +19,9 @@ export default function SearchBar() {
 
   });
 
+  useEffect(() => {
+    console.log(data);
+  },[data])
 
 
   return (

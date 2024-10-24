@@ -42,7 +42,7 @@ async function cityNameToPosition(cityName, signal){
             console.log('Fetch aborted');
         } else {
             console.error('Fetch error:', err);
-            throw new Error(err.message); // Rethrow with the original message
+            throw new Error(err.message); 
         }
     }
 }
