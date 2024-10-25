@@ -38,7 +38,7 @@ async function cityNameToPosition(cityName, signal){
         return data;
     }
     catch(err){
-        console.error('Fetch error:', err);
+        // console.error('Fetch error:', err);
         throw new Error(err.message);   
     }
 }

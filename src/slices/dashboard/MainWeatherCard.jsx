@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTempScaleContext } from "../../contexts/TempScaleContext";
 import { useCoordinates } from "../../contexts/CoordinatesContext";
 import useGetWeatherInfoOfPosition from "../useGetWeatherInfoOfPosition";
@@ -15,19 +14,11 @@ export default function MainWeatherCard() {
 
     const { isCelcius } = useTempScaleContext();
     const { city } = useCoordinates();
-    const [, setSearchParams] = useSearchParams();
     const { data, isPending, error, isError } = useGetWeatherInfoOfPosition(city);
 
     const { name, sys, main } = data ?? {};
     const temperature = isCelcius ? main?.temp : (main?.temp * 9/5) + 32;
     const feelsLike = isCelcius ? main?.feels_like : (main?.feels_like * 9/5) + 32;
-
-
-    
-    useEffect(() => {
-        setSearchParams(city);
-    }, [city, setSearchParams])
-
 
     
     if(isPending) return(

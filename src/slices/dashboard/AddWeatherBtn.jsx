@@ -1,10 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom"
-import { addToWeatherList, fetchUsersWeatherList } from "../../services/supabase";
+import { addToWeatherList } from "../../services/supabase";
 import { useAuthContext } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
 import Spinner from "../../ui/Spinner";
 import PropTypes from "prop-types";
+import useGetUsersLocation from "../useGetUsersWeatherList";
 
 
 
@@ -16,26 +17,23 @@ export default function AddWeatherBtn({city, city_name, country_code}) {
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const queryClient = useQueryClient();
+  const { usersLocations } = useGetUsersLocation(user);
 
-  const { data } = useQuery({
-    queryKey: ["usersWeather", user],
-    queryFn: () => fetchUsersWeatherList(user.id),
-    refetchOnWindowFocus: false,
-    enabled: user !== null,
-  })
 
   const { mutate: addWeather, isPending: isAddingWeather  } = useMutation({
     mutationFn: () => addToWeatherList(city_name, country_code, city.lat, city.lon, user.id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["usersWeather", user] });
-      toast.success("Added successfully!");
+      toast.success("Added successfully!", {
+        duration: 1000
+      });
     },
     onError: (err) => toast.error(err.message || err.description || "Something went wrong adding this weather!"),
     refetchOnWindowFocus: false,
   });
   
 
-  const isThisCityAlreadyIncluded = data?.find((item) => item.city_name === city_name && item.country_code === country_code ); //There might be cases in which there is a city with the same name as another within the same Country but in a different state, in that case, user should be able to add it to their list, but since neither the weather api nor the map proportionates the state name, so far I don't a way to differenciate.
+  const isThisCityAlreadyIncluded = usersLocations?.find((item) => item.city_name === city_name && item.country_code === country_code ); //There might be cases in which there is a city with the same name as another within the same Country but in a different state, in that case, user should be able to add it to their list, but since neither the weather api nor the map proportionates the state name, so far I don't a way to differenciate.
 
 
 
@@ -49,6 +47,7 @@ export default function AddWeatherBtn({city, city_name, country_code}) {
     >
       { isAddingWeather ? <Spinner size={1} type="secondary" /> : "+" }
     </button>
+    
   )
 }
 
