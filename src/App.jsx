@@ -64,9 +64,7 @@ export default function App() {
         </SearchProvider> 
       </AuthProvider>
 
-      <Toaster toastOptions={{
-        duration: 2000,
-      }} />
+      <Toaster />
 
     </QueryClientProvider>
   )

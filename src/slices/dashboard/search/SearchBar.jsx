@@ -3,7 +3,6 @@ import { cityNameToPosition } from "../../../services/openWeather";
 import { useSearch } from "../../../contexts/SearchContext";
 import SuggestionsContainer from "./SuggestionsContainer";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
 
 
 
@@ -16,13 +15,9 @@ export default function SearchBar() {
     queryKey: [search],
     queryFn: async ({signal}) => cityNameToPosition(search, signal),
     onError: (error) => toast.error(error),
-
   });
 
-  useEffect(() => {
-    console.log(data);
-  },[data])
-
+  
 
   return (
     <form 
@@ -31,7 +26,7 @@ export default function SearchBar() {
     >
       <input 
         type="text" 
-        placeholder="search location here..." 
+        placeholder="search by city's name..." 
         className="py-2 px-3 w-full outline-none rounded-lg dark:bg-[#252525]/60 dark:text-white"
         value={search}
         onChange={(e) => setSearch(e.target.value)} 

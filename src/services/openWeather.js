@@ -8,7 +8,7 @@ async function getWeatherData(position, signal){
 
         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.lat}&lon=${position.lon}&appid=${API_KEY}&units=metric`, { signal } );
 
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status} - ${res.statusText}`);
 
         const data = await res.json();
 
@@ -38,12 +38,8 @@ async function cityNameToPosition(cityName, signal){
         return data;
     }
     catch(err){
-        if (err.name === 'AbortError') {
-            console.log('Fetch aborted');
-        } else {
-            console.error('Fetch error:', err);
-            throw new Error(err.message); 
-        }
+        console.error('Fetch error:', err);
+        throw new Error(err.message);   
     }
 }
 

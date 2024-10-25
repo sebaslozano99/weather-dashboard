@@ -1,20 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchUsersWeatherList } from "../../services/supabase";
-import { useAuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext";
 import WeatherItem from "./WeatherItem";
+import useGetUsersLocation from "../useGetUsersWeatherList";
 
 
 export default function WeathersContainer() {
 
   const { user } = useAuthContext();
-
-  const { data } = useQuery({
-    queryKey: ["usersWeather"],
-    queryFn: () => fetchUsersWeatherList(user.id),
-    refetchOnWindowFocus: false,
-    enabled: user !== null
-  });
+  const { usersLocations } = useGetUsersLocation(user);
 
 
   return (
@@ -35,7 +28,7 @@ export default function WeathersContainer() {
       }
 
 
-      { !data && user !== null || data?.length === 0 &&  user !== null &&
+      { !usersLocations && user !== null || usersLocations?.length === 0 &&  user !== null &&
         <div className="flex flex-col items-center gap-6 w-full">
           <h2 className="font-medium text-xl dark:text-white text-center h-[20%]">Start adding the locations You want to know its weather information</h2>
 
@@ -50,7 +43,7 @@ export default function WeathersContainer() {
       }
 
 
-      { data && user !== null && data.map((item) =>  <WeatherItem key={item.id} id={item.id} position={{lat: item.latitude, lon: item.longitude}} /> ) }
+      { usersLocations && user !== null && usersLocations.map((item) =>  <WeatherItem key={item.id} id={item.id} position={{lat: item.latitude, lon: item.longitude}} /> ) }
     </>
 
   )
